@@ -1,26 +1,32 @@
 import React from 'react';
-import axios from 'axios'
+import axios from '../utils/axios'
 
 function Login(props) {
-    const [username, setUsername] = React.useState('')
+    const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
-    
+
     const login = (e)=>{
         e.preventDefault()
-        console.log('logging')
-        
-        axios.post('https://website-backend.computiq.tech/api/score/auth/login',{
-            email: "info@computiq.tech",
-            password: "1234"
+        axios.post('/api/academy/auth/login',
+        {
+            email:email,
+            password:password
+        }
+        )
+        .then((response)=>{
+            console.log(response)
+            let token = response.data.token.access_token;
+            let data = response.data;
+            localStorage.setItem('token', JSON.stringify(data))
         })
-        .then((response) => {
-          console.log(response)
-        });
+        .catch((err)=>{
+            console.log(err)
+        })
     }
     return (
         <div>
           <form>
-              <input value={username} onChange={(e)=>setUsername(e.target.value)} type="text" />
+              <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" />
               <input value={password} onChange={(e)=>setPassword(e.target.value)} type="password" />
               <input type="submit" onClick={login}/>
           </form>

@@ -158,7 +158,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
         {/* Routes */}
             <Routes>
                 <Route  path="/dashboard" element={<Dashboard/>}/>
-                <Route path="/ategories" element={<Categories   {...props}/>}/>
+                <Route path="/categories" element={<Categories   {...props}/>}/>
                 <Route path="/products" element={<Products/>}/>
                 <Route path="/login" element={<Login/>}/>
 
