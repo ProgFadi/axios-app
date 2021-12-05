@@ -15,9 +15,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import {Routes,Link, Route, useLocation} from 'react-router-dom'
+import {Routes,Link, Route} from 'react-router-dom'
 import Dashboard from '../pages/Dashboard'
 import Categories from '../pages/Categories'
 import Products from '../pages/Products'
@@ -25,7 +23,6 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import GridViewIcon from '@mui/icons-material/GridView';
 import CategoryIcon from '@mui/icons-material/Category';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
-import Login from '../pages/Login'
 const drawerWidth = 240;
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -74,7 +71,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
  function PersistentDrawerLeft(props) {
-  let location = useLocation()
+  // let location = useLocation()
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -85,19 +82,19 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     setOpen(false);
   };
 
-  const renderContent = (pathName)=>{
-    switch(pathName)
-    {
-      case '/login':
-        return <Login/>
-      case '/products':
-        return <Products/>
-      case '/dashboard':
-        return <Dashboard/>
-      case '/categories':
-        return <Categories/>
-    }
-  }
+  // const renderContent = (pathName)=>{
+  //   switch(pathName)
+  //   {
+  //     case '/login':
+  //       return <Login/>
+  //     case '/products':
+  //       return <Products/>
+  //     case '/dashboard':
+  //       return <Dashboard/>
+  //     case '/categories':
+  //       return <Categories/>
+  //   }
+  // }
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -168,7 +165,14 @@ const DrawerHeader = styled('div')(({ theme }) => ({
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-       {renderContent(location.pathname)}
+       {/* {renderContent(location.pathname)} */}
+       <Routes>
+   <Route path="/dashboard" element={<Dashboard/>}/>
+   <Route path="/categories" element={<Categories   {...props}/>}/>
+   <Route path="/products" element={<Products/>}/>
+   {/* <Route path="/login" element={<Login/>}/> */}
+
+    </Routes> 
         
       </Main>
     </Box>

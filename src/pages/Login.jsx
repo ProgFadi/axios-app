@@ -15,7 +15,7 @@ function Login(props) {
         )
         .then((response)=>{
             console.log(response)
-            let token = response.data.token.access_token;
+            // let token = response.data.token.access_token;
             let data = response.data;
             localStorage.setItem('token', JSON.stringify(data))
         })
