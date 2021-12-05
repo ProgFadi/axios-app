@@ -8,7 +8,7 @@ import Drawer from './components/Drawer'
 ReactDOM.render(
   <React.StrictMode>
    <BrowserRouter>
-      <Drawer />
+      <App />
    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

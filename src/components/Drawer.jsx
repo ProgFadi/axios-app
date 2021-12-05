@@ -74,6 +74,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
  function PersistentDrawerLeft(props) {
+  let location = useLocation()
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -84,6 +85,19 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     setOpen(false);
   };
 
+  const renderContent = (pathName)=>{
+    switch(pathName)
+    {
+      case '/login':
+        return <Login/>
+      case '/products':
+        return <Products/>
+      case '/dashboard':
+        return <Dashboard/>
+      case '/categories':
+        return <Categories/>
+    }
+  }
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -154,15 +168,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-       
-        {/* Routes */}
-            <Routes>
-                <Route  path="/dashboard" element={<Dashboard/>}/>
-                <Route path="/categories" element={<Categories   {...props}/>}/>
-                <Route path="/products" element={<Products/>}/>
-                <Route path="/login" element={<Login/>}/>
-
-            </Routes>
+       {renderContent(location.pathname)}
+        
       </Main>
     </Box>
   );
