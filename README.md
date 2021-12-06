@@ -11,7 +11,7 @@ Task Requirements, Hints and details:
 - Take a look at below sketched layout to understand the requirements.
 ![Main](https://user-images.githubusercontent.com/20383171/144898668-3ba8dba8-804d-4e9f-a09c-ddfe916d8f5c.png)
 
-- Fetch products list from an API, render them on UI like what you did in previous task (with search functionalities).
+- Fetch products list from an API, render them on UI like what you did in previous task (with search functionalities), use this free API https://github.com/keikaavousi/fake-store-api
 - Protect Products page to be viewed by authorized users only. 
 - Enable functionality of "add to cart" button for each product card. when the user click on "add to cart" for each product, the product object should be added to a stored array in local storage.
 - Add cart icon besides Avatar component at App Bar.
