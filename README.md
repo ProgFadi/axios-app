@@ -9,7 +9,8 @@
 
 Task Requirements, Hints and details:
 - Take a look at below sketched layout to understand the requirements.
-![Main](https://user-images.githubusercontent.com/20383171/143789783-d410673a-e0cb-4490-a018-a7cab9622050.png)
+![Main](https://user-images.githubusercontent.com/20383171/144898668-3ba8dba8-804d-4e9f-a09c-ddfe916d8f5c.png)
+
 
 - Re-use products components that you implemented in previous task with all functionalities, use them in products page.
 - Protect Products page to be viewed by authorized users only. 
