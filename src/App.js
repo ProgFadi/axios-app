@@ -8,7 +8,6 @@ function App(props) {
 
   return  (
     <div>
-{      console.log(location.pathname)
 }      {location.pathname ==='/login'? <Login /> : <Drawer />}
     </div>
 
