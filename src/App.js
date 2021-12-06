@@ -4,9 +4,14 @@ import Dashboard from './pages/Dashboard'
 import Categories from './pages/Categories'
 import Products from './pages/Products'
 import Login from './pages/Login'
-import {Route, Routes} from 'react-router-dom'
+import {Navigate, Route, Routes} from 'react-router-dom'
+import {useEffect,useState} from 'react'
 import Drawer from './components/Drawer'
+
+
 function App(props) {
+
+
   return  <Routes>
    <Route path="/dashboard" element={<Drawer/>}/>
    <Route path="/categories" element={<Drawer   {...props}/>}/>
