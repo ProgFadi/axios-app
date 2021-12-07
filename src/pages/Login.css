@@ -1,0 +1,56 @@
+@media (min-width: 1000px) {
+	.css-123re6j {
+		padding-top: 120px;
+		padding-bottom: 120px;
+	}
+}
+@media (min-width: 0px) {
+	.css-123re6j {
+		padding-top: 60px;
+		padding-bottom: 60px;
+	}
+}
+@media (min-width: 600px) {
+	.css-123re6j {
+		max-width: 600px;
+	}
+}
+@media (min-width: 600px) {
+	.css-123re6j {
+		padding-left: 24px;
+		padding-right: 24px;
+	}
+}
+.css-123re6j {
+	width: 100%;
+	margin-left: auto;
+	box-sizing: border-box;
+	margin-right: auto;
+	display: block;
+	padding-left: 16px;
+	padding-right: 16px;
+}
+.css-xilcp4 {
+	background-color: rgb(17, 24, 39) !important;
+	color: rgb(237, 242, 247) !important ;
+	transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
+	border-radius: 8px !important;
+	box-shadow: rgb(0 0 0 / 24%) 0px 10px 15px !important;
+	background-image: none;
+	overflow: hidden;
+	padding: 32px;
+}
+.Boxclass {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+}
+.formStyle {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 206px;
+}
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+	color: white !important;
+}

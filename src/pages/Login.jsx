@@ -1,5 +1,13 @@
-import React from 'react';
+import * as React from 'react'
+import './Login.css'
+import Box from '@mui/material/Box'
+import Container from '@mui/material/Container'
 import axios from '../utils/axios'
+import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+
+
 
 function Login(props) {
     const [email, setEmail] = React.useState('')
@@ -24,13 +32,31 @@ function Login(props) {
         })
     }
     return (
-        <div>
-          <form>
-              <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" />
-              <input value={password} onChange={(e)=>setPassword(e.target.value)} type="password" />
-              <input type="submit" onClick={login}/>
-          </form>
-        </div>
+        <Box sx={{
+            boxSizing: 'border-box',
+            backgroundColor: 'rgb(11, 15, 25)',
+            display: 'flex',
+            flexDirection: 'column',
+            minHeight: '100vh',
+        }} >
+            <Container className='MuiContainer-root MuiContainer-maxWidthSm css-123re6j'>
+              <Paper className='MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation16 MuiCard-root css-xilcp4'>
+                <Box className='Boxclass'>
+                    <img src={'https://board.computiq.tech/assets/logo.b3f1408e.png'} alt='Comutiq logo' height='40px'/>
+                    <h4>Login</h4>
+                    <p>Sign in on the internal platform</p>
+                </Box>
+                <Box>
+                <form className='formStyle'>
+                    <TextField  label="Email" variant="outlined" value={email} onChange={(e)=>setEmail(e.target.value)} type="email" />
+                    <TextField  label="Password" variant="outlined" value={password} onChange={(e)=>setPassword(e.target.value)} type="password" />
+                    <Button variant="contained" type="submit" onClick={login}>Login</Button>
+                 </form>
+                </Box>
+               </Paper>
+            </Container>
+      </Box>
+
     );
 }
 
