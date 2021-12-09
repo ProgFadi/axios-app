@@ -14,27 +14,16 @@ body{
     -o-border-radius:5px;
 }
 
-.srch-inp{
-    padding-block:10px;
-    padding-right:60px;
-    padding-left: 15PX;
-}
-
-/* .products{
-    display: grid;
-    grid-template-columns:repeat(6, 1fr)
-}
-
-.d{
-    display:inline-flex;
-} */
 
 .pro{
     display:grid;
     grid-template-columns:repeat(5, 1fr)
 
 }
-
+.pro-cart{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+}
 .pr {
     display:flex;
     margin-top: 30px;

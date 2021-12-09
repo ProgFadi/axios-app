@@ -123,7 +123,7 @@ function PersistentDrawerLeft(props) {
       case '/categories':
         return <Categories />
       case '/cart':
-        return <Cart  setCartItems={props.setCartItems}/>
+        return <Cart  setCartItems={props.setCartItems} cartItems={props.cartItems} onRemove={props.onRemove}/>
     }
   }
   const handleOpenUserMenu = (event) => {

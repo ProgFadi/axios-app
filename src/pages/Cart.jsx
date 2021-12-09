@@ -1,16 +1,12 @@
+import Paper from "../components/Paper";
 
-function Cart({setCartItems}) {
-    let cartList = localStorage.getItem('data');
-        cartList = JSON.parse(cartList);
-    const removeFromLocalStorage = ((removeData, index)=>{
-        setCartItems(removeData.splice(index, 1))
-        localStorage.setItem('data', JSON.stringify(removeData))
-})
+function Cart({onRemove, cartItems}) {
+   
     return (
         <div>
               <div className={'pro'}>
                 {
-                    cartList.map((product, index)=>(
+                    cartItems.map((product, index)=>(
                         <div key={index} className={'pr'}>
                             <div className={'img-div'}>
                             <img src={product.image} alt="" />
@@ -21,11 +17,12 @@ function Cart({setCartItems}) {
                             <h4 className={'price'}>
                             $ {product.price}
                             </h4>
-                            <button className={'cart-btn'} onClick={()=>removeFromLocalStorage(cartList, index)}>Remove</button>
+                            <button className={'cart-btn'} onClick={()=>onRemove(index)}>Remove</button>
                         </div>
                     ))
                 }
             </div>
+            {/* <Paper/> */}
         </div>
     )
 }

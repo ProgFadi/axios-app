@@ -1,6 +1,6 @@
 import'./page.css'
 function ProductCard({onAdd, passedData}) {
-
+    if (!passedData.length) return <h2>Loading ...</h2>;
     return (
         <div>
               <div className={'pro'}>
