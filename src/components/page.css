@@ -1,0 +1,110 @@
+body{
+    background: rgb(255, 255, 255);
+}
+
+.btn{
+    padding-inline: 90px;
+    padding-block: 10px;
+    border:none;
+    border-radius:5px;
+    background: green;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    -ms-border-radius:5px;
+    -o-border-radius:5px;
+}
+
+.srch-inp{
+    padding-block:10px;
+    padding-right:60px;
+    padding-left: 15PX;
+}
+
+/* .products{
+    display: grid;
+    grid-template-columns:repeat(6, 1fr)
+}
+
+.d{
+    display:inline-flex;
+} */
+
+.pro{
+    display:grid;
+    grid-template-columns:repeat(5, 1fr)
+
+}
+
+.pr {
+    display:flex;
+    margin-top: 30px;
+    height: 320px;
+    width: 250px;  
+    position: relative;
+    background: rgb(243, 241, 241);
+    border-radius:10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    -ms-border-radius:10px;
+    -o-border-radius:10px;
+}
+.img-div{
+    width:100%;
+    margin-top: 30px;
+    text-align:center
+}
+img { 
+
+    height: 50%;
+    width: 50%;
+}
+.pro-nam{
+    position:absolute;
+    bottom: 30px;
+    left: 10px;
+    font-size: 16px;
+
+}
+.price{
+    position:absolute;
+    bottom: 2px;
+    right: 10px;
+    background: white;
+    color: orange;
+    padding:2px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.cart-btn{
+    position:absolute;
+    bottom: -20px;
+    background: #000;
+    color: white;
+    width: inherit;
+    padding: 10px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border:0;
+}
+
+.form{
+    display:flex;
+    justify-content: space-between;
+}
+
+.right-form{
+display:flex;
+}
+.right-form >div{
+    margin-inline:10px;
+
+}

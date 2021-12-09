@@ -22,6 +22,7 @@ import { Routes, Link, Route, useLocation, useNavigate } from 'react-router-dom'
 import Dashboard from '../pages/Dashboard'
 import Categories from '../pages/Categories'
 import Products from '../pages/Products'
+import Cart from '../pages/Cart'
 import LogoutIcon from '@mui/icons-material/Logout';
 import GridViewIcon from '@mui/icons-material/GridView';
 import CategoryIcon from '@mui/icons-material/Category';
@@ -33,6 +34,8 @@ import Menu from '@mui/material/Menu';
 import Tooltip from '@mui/material/Tooltip';
 import {navigate} from 'react-router-dom'
 import {TOKEN_KEY} from '../utils/Constants'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { Stack, ToggleButton } from '@mui/material';
 
 const drawerWidth = 240;
 
@@ -104,6 +107,10 @@ function PersistentDrawerLeft(props) {
     navigate('/login')
     handleCloseUserMenu()
   }
+  const goToCart = () => {
+    navigate('/cart')
+
+  }
   useEffect(() => {
 
   }, [])
@@ -113,11 +120,13 @@ function PersistentDrawerLeft(props) {
       case '/login':
         return <Login />
       case '/products':
-        return <Products />
+        return <Products prod={props.prod} onAdd={props.onAdd}/>
       case '/dashboard':
         return <Dashboard />
       case '/categories':
         return <Categories />
+      case '/cart':
+        return <Cart  setCartItems={props.setCartItems}/>
     }
   }
   const handleOpenUserMenu = (event) => {
@@ -150,12 +159,19 @@ function PersistentDrawerLeft(props) {
             <Typography variant="h6" noWrap component="div">
 
             </Typography>
+              <Stack direction="row" spacing={2} sx={{ alignItems:'center'}}>
+            <Tooltip title="Cart">
+            <IconButton onClick={goToCart}>
+            <ShoppingCartIcon sx={{color:'white'}} />
+            </IconButton>
+            </Tooltip>
             <Tooltip title="Logout">
+
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
-
+              </Stack>
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -221,7 +237,7 @@ function PersistentDrawerLeft(props) {
         </List>
         <Divider />
         <List>
-          <ListItem component={Link} to="/login" key='logout'>
+          <ListItem component={Link} onClick={logout} to="/login" key='logout'>
             <ListItemIcon>
               <LogoutIcon />
             </ListItemIcon>
