@@ -11,7 +11,7 @@ function Cart({setCartItems}) {
               <div className={'pro'}>
                 {
                     cartList.map((product, index)=>(
-                        <div className={'pr'}>
+                        <div key={index} className={'pr'}>
                             <div className={'img-div'}>
                             <img src={product.image} alt="" />
                             </div>

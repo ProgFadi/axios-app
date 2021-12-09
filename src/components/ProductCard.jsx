@@ -5,9 +5,9 @@ function ProductCard({onAdd, passedData}) {
         <div>
               <div className={'pro'}>
                 {
-                    passedData.map((product)=>(
+                    passedData.map((product, index)=>(
                         
-                        <div className={'pr'}>
+                        <div key={index} className={'pr'}>
                             <div className={'img-div'}>
                             <img src={product.image} alt="" />
                             </div>

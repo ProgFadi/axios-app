@@ -23,7 +23,6 @@ function App(props) {
    <Route path="/products"  element={<Drawer onAdd={addToLocalStorage}/>}/>
    <Route path="/cart" element={<Drawer setCartItems={setCartItems}/>}/>
    <Route path="/login" element={<Login/>}/>
-
 </Routes>
 }
 

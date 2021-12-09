@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import {Navigate} from 'react-router-dom'
 function Dashboard(props) {
     const [isLogged, setIsLogged] = React.useState(true)
