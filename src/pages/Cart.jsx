@@ -19,25 +19,36 @@ let Cart = (props)=> {
     const [final, setFinal] = useState(0)
     const [qty, setQty] = useState(0)
 
+    
     useEffect(()=>{
         let carts = JSON.parse(localStorage.getItem('items')) ?? []
+
         if(carts.length!=0)
         {
-            let tot=0,fin=0,dis=99,qt=0
+            
             setEmpty(false)
             setItems([...carts])
-            setInum(carts.length)
-            setDiscount(99)
-            carts.map((item)=> tot+=(item.price*item.qty) )
-            carts.map((item)=> qt+=item.qty)
-            fin = (tot - dis) 
-            fin = fin<0? 0 : fin
-            setTotal(tot.toFixed(2))
-            setFinal(fin.toFixed(2))
-            setQty(qt)
-        }
+        } 
+            
+    },[])
 
-        return
+    useEffect(()=>{
+        let carts = JSON.parse(localStorage.getItem('items')) ?? []
+        setEmpty(carts.length==0? true : false)
+        let tot=0,fin=0,dis=99,qt=0
+        setInum(carts.length)
+        setDiscount(99)
+        carts.map((item)=> tot+=(item.price*item.qty) )
+        carts.map((item)=> qt+=item.qty)
+        fin = (tot - dis) 
+        fin = fin<0? 0 : fin
+        setTotal(tot.toFixed(2))
+        setFinal(fin.toFixed(2))
+        setQty(qt)
+
+    
+
+        
             
     },[items])
 
@@ -45,13 +56,13 @@ let Cart = (props)=> {
             <Container fixed>
               
                 {empty && <Typography variant="h4" gutterBottom component="div">Cart is Empty!</Typography>}
-                <Box sx={{ flexGrow: 1 , marginTop: 15 }}>
+                <Box sx={{ flexGrow: 1  }}>
                     <Grid container >
                         <Grid item xs={6}>
                             <Masonry columns={{ xs: 2}} >
                                 {
                                     items.map((item,index)=>{
-                                        return <Product key={index} title={item.title} price={item.price} img={item.image} product={item}  btn='Remove' type='remove' />
+                                        return <Product key={index} title={item.title} price={item.price} img={item.image} product={item}  btn='Remove' type='remove' setItems={setItems} />
                                 })
                                 }
                             </Masonry>

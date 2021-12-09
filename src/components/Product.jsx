@@ -45,6 +45,8 @@ const Product = (props)=> {
         items = items.filter((item,index)=>{
             return item.id!=product.id
         })
+
+        props.setItems([...items])
         localStorage.setItem("items",JSON.stringify(items))
     }
 
