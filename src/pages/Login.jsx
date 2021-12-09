@@ -9,7 +9,7 @@ function Login(props) {
 
     const login = (e)=>{
         e.preventDefault()
-        axios.post('/api/academy/auth/login',
+        axios.post('https://website-backend.computiq.tech/api/academy/auth/login',
         {
             email:email,
             password:password
