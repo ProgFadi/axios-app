@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect } from 'react'
+import { useEffect } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -18,25 +18,29 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { Routes, Link, Route, useLocation, useNavigate } from 'react-router-dom'
-import Dashboard from '../pages/Dashboard'
-import Categories from '../pages/Categories'
-import Products from '../pages/Products'
+import {
+  Routes,
+  Link,
+  Route,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
+import Dashboard from '../pages/Dashboard';
+import Categories from '../pages/Categories';
+import Products from '../pages/Products';
 import LogoutIcon from '@mui/icons-material/Logout';
 import GridViewIcon from '@mui/icons-material/GridView';
 import CategoryIcon from '@mui/icons-material/Category';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
-import Login from '../pages/Login'
-import Avatar from './Avatar'
+import Login from '../pages/Login';
+import Avatar from './Avatar';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Tooltip from '@mui/material/Tooltip';
-import {navigate} from 'react-router-dom'
-import {TOKEN_KEY} from '../utils/Constants'
+import { Navigate } from 'react-router-dom';
+import { TOKEN_KEY } from '../utils/Constants';
 
 const drawerWidth = 240;
-
-
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -54,7 +58,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
       }),
       marginLeft: 0,
     }),
-  }),
+  })
 );
 
 const AppBar = styled(MuiAppBar, {
@@ -84,8 +88,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 function PersistentDrawerLeft(props) {
-  const location = useLocation()
-  const navigate = useNavigate()
+  const location = useLocation();
+  const navigate = useNavigate();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -100,26 +104,24 @@ function PersistentDrawerLeft(props) {
   };
 
   const logout = () => {
-    localStorage.removeItem(TOKEN_KEY)
-    navigate('/login')
-    handleCloseUserMenu()
-  }
-  useEffect(() => {
-
-  }, [])
+    localStorage.removeItem(TOKEN_KEY);
+    navigate('/login');
+    handleCloseUserMenu();
+  };
+  useEffect(() => {}, []);
   const renderContent = (routeName) => {
-    console.log(routeName)
+    console.log(routeName);
     switch (routeName) {
       case '/login':
-        return <Login />
+        return <Login />;
       case '/products':
-        return <Products />
+        return <Products />;
       case '/dashboard':
-        return <Dashboard />
+        return <Dashboard />;
       case '/categories':
-        return <Categories />
+        return <Categories />;
     }
-  }
+  };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -130,14 +132,15 @@ function PersistentDrawerLeft(props) {
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar >
-          <Box sx={{
-            flexGrow: 1,
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between'
-          }}>
-
+        <Toolbar>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}
+          >
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -147,9 +150,7 @@ function PersistentDrawerLeft(props) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap component="div">
-
-            </Typography>
+            <Typography variant="h6" noWrap component="div"></Typography>
             <Tooltip title="Logout">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -172,12 +173,11 @@ function PersistentDrawerLeft(props) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem key='Logout' onClick={logout}>
+              <MenuItem key="Logout" onClick={logout}>
                 <Typography textAlign="center">Logout</Typography>
               </MenuItem>
             </Menu>
           </Box>
-
         </Toolbar>
       </AppBar>
       <Drawer
@@ -195,37 +195,41 @@ function PersistentDrawerLeft(props) {
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            {theme.direction === 'ltr' ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
-          <ListItem component={Link} to="/dashboard" key='dashboard'>
+          <ListItem component={Link} to="/dashboard" key="dashboard">
             <ListItemIcon>
               <GridViewIcon />
             </ListItemIcon>
-            <ListItemText primary='Dashboard' />
+            <ListItemText primary="Dashboard" />
           </ListItem>
-          <ListItem component={Link} to="/categories" key='categories'>
+          <ListItem component={Link} to="/categories" key="categories">
             <ListItemIcon>
               <CategoryIcon />
             </ListItemIcon>
-            <ListItemText primary='Categories' />
+            <ListItemText primary="Categories" />
           </ListItem>
-          <ListItem component={Link} to="/products" key='products'>
+          <ListItem component={Link} to="/products" key="products">
             <ListItemIcon>
               <ProductionQuantityLimitsIcon />
             </ListItemIcon>
-            <ListItemText primary='Products' />
+            <ListItemText primary="Products" />
           </ListItem>
         </List>
         <Divider />
         <List>
-          <ListItem component={Link} to="/login" key='logout'>
+          <ListItem component={Link} to="/login" key="logout">
             <ListItemIcon>
               <LogoutIcon />
             </ListItemIcon>
-            <ListItemText primary='Logout' />
+            <ListItemText primary="Logout" />
           </ListItem>
         </List>
       </Drawer>
@@ -237,4 +241,4 @@ function PersistentDrawerLeft(props) {
   );
 }
 
-export default PersistentDrawerLeft
+export default PersistentDrawerLeft;
