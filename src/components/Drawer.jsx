@@ -33,6 +33,8 @@ import Menu from '@mui/material/Menu';
 import Tooltip from '@mui/material/Tooltip';
 import {navigate} from 'react-router-dom'
 import {TOKEN_KEY} from '../utils/Constants'
+import Cart from '../pages/Cart'
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 const drawerWidth = 240;
 
@@ -101,7 +103,7 @@ function PersistentDrawerLeft(props) {
 
   const logout = () => {
     localStorage.removeItem(TOKEN_KEY)
-    navigate('/login')
+    navigate('/')
     handleCloseUserMenu()
   }
   useEffect(() => {
@@ -110,7 +112,7 @@ function PersistentDrawerLeft(props) {
   const renderContent = (routeName) => {
     console.log(routeName)
     switch (routeName) {
-      case '/login':
+      case '/':
         return <Login />
       case '/products':
         return <Products />
@@ -118,6 +120,8 @@ function PersistentDrawerLeft(props) {
         return <Dashboard />
       case '/categories':
         return <Categories />
+        case '/Cart':
+        return <Cart />
     }
   }
   const handleOpenUserMenu = (event) => {
@@ -150,11 +154,21 @@ function PersistentDrawerLeft(props) {
             <Typography variant="h6" noWrap component="div">
 
             </Typography>
+            {/* <ListItem component={Link} to="/Cart" key='Cart'>
+            <ListItemIcon>
+              <AddShoppingCartIcon />
+            </ListItemIcon>
+            <ListItemText primary='Cart' />
+          </ListItem> */}
+          <Box>
+          <IconButton component={Link} to='/Cart' >< AddShoppingCartIcon   style={{backgroundColor:'green',color:'white'}}/> </IconButton>  
             <Tooltip title="Logout">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
+            </Box>
+           
 
             <Menu
               sx={{ mt: '45px' }}
@@ -218,10 +232,16 @@ function PersistentDrawerLeft(props) {
             </ListItemIcon>
             <ListItemText primary='Products' />
           </ListItem>
+          <ListItem component={Link} to="/Cart" key='Cart'>
+            <ListItemIcon>
+              <ProductionQuantityLimitsIcon />
+            </ListItemIcon>
+            <ListItemText primary='Cart' />
+          </ListItem>
         </List>
         <Divider />
         <List>
-          <ListItem component={Link} to="/login" key='logout'>
+          <ListItem component={Link} to="/" key='logout'>
             <ListItemIcon>
               <LogoutIcon />
             </ListItemIcon>
