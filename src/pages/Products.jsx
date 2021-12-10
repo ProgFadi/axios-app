@@ -1,10 +1,33 @@
-import React, { useEffect } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
+import ProductCard from '../components/ProductCard';
+function Products({onAdd}) {
+    const [isLogged, setIsLogged] = useState(true)
+    const [data, setData] = useState([]);
+    useEffect(()=>{
+        axios.get('https://fakestoreapi.com/products').then((response) => {
+            let redata = response.data
+            setData(redata);
+        });
 
-function Products(props) {
-    
+        let token;
+        try {
+        token = JSON.parse(localStorage.getItem('token'))
+        if(!token)
+            setIsLogged(false)
+        }
+        catch (error)
+        {
+            setIsLogged(false)
+        }
+    },[])
+
+    if(!isLogged){
+        return <Navigate to="/login"/>}
     return (
         <div>
-            Products
+        <ProductCard passedData={data} onAdd={onAdd}/>
         </div>
     );
 }
