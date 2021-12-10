@@ -90,6 +90,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
 }));
+let counter, currentcounter;
 
 function PersistentDrawerLeft(props) {
   const location = useLocation();
@@ -109,6 +110,13 @@ function PersistentDrawerLeft(props) {
 
     setSnack(false);
   };
+
+  counter = localStorage.getItem("carts");
+  if (counter) {
+    currentcounter = JSON.parse(counter);
+  } else {
+    currentcounter = [];
+  }
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -189,7 +197,7 @@ function PersistentDrawerLeft(props) {
                 }}
               >
                 <Stack spacing={2} direction="row">
-                  <Badge badgeContent={5} color="secondary">
+                  <Badge badgeContent={currentcounter.length} color="secondary">
                     <ShoppingCartIcon
                       color="secondary"
                       sx={{
