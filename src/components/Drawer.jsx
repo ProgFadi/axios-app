@@ -16,13 +16,10 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import { Routes, Link, Route, useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Dashboard from '../pages/Dashboard'
 import Categories from '../pages/Categories'
-import Products from '../pages/Products'
-import LogoutIcon from '@mui/icons-material/Logout';
+import Products from "../pages/Products";
 import GridViewIcon from '@mui/icons-material/GridView';
 import CategoryIcon from '@mui/icons-material/Category';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
@@ -31,8 +28,8 @@ import Avatar from './Avatar'
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Tooltip from '@mui/material/Tooltip';
-import {navigate} from 'react-router-dom'
-import {TOKEN_KEY} from '../utils/Constants'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Cart from '../pages/Cart';
 
 const drawerWidth = 240;
 
@@ -100,7 +97,7 @@ function PersistentDrawerLeft(props) {
   };
 
   const logout = () => {
-    localStorage.removeItem(TOKEN_KEY)
+    localStorage.removeItem('token')
     navigate('/login')
     handleCloseUserMenu()
   }
@@ -108,8 +105,9 @@ function PersistentDrawerLeft(props) {
 
   }, [])
   const renderContent = (routeName) => {
-    console.log(routeName)
     switch (routeName) {
+      case '/':
+        return <Dashboard />
       case '/login':
         return <Login />
       case '/products':
@@ -118,7 +116,14 @@ function PersistentDrawerLeft(props) {
         return <Dashboard />
       case '/categories':
         return <Categories />
+      case '/cart':
+        return <Cart />
+        default:
+           
     }
+  }
+  const cartBtn = () => {
+    navigate('/cart')
   }
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -148,13 +153,26 @@ function PersistentDrawerLeft(props) {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap component="div">
-
             </Typography>
+            <Box>
+              <Tooltip title="My Cart">
+              <IconButton onClick={cartBtn} 
+              sx={{ color: 'white',
+                border: '1px solid gray',
+                borderRadius: '5px',
+                margin: '10px' }}>
+                <ShoppingCartIcon />
+              </IconButton>
+            </Tooltip>
+
             <Tooltip title="Logout">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
+            </Box>
+            
+              
 
             <Menu
               sx={{ mt: '45px' }}
@@ -212,20 +230,20 @@ function PersistentDrawerLeft(props) {
             </ListItemIcon>
             <ListItemText primary='Categories' />
           </ListItem>
-          <ListItem component={Link} to="/products" key='products'>
+          <ListItem component={Link} to="/products" key='product'>
             <ListItemIcon>
               <ProductionQuantityLimitsIcon />
             </ListItemIcon>
-            <ListItemText primary='Products' />
+            <ListItemText primary='Product' />
           </ListItem>
         </List>
         <Divider />
         <List>
-          <ListItem component={Link} to="/login" key='logout'>
+          <ListItem component={Link} to="/cart">
             <ListItemIcon>
-              <LogoutIcon />
+              <ShoppingCartIcon />
             </ListItemIcon>
-            <ListItemText primary='Logout' />
+            <ListItemText primary='My Cart' />
           </ListItem>
         </List>
       </Drawer>
