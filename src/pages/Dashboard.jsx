@@ -20,7 +20,7 @@ function Dashboard(props) {
     console.log('3')
 
     if(!isLogged)
-        return <Navigate to="/login"/>
+        return <Navigate to="/"/>
 
     return (
         <div>
