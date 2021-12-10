@@ -1,10 +1,11 @@
-import * as React from 'react';
 import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import ProductCard from '../components/ProductCard';
 import SearchInput from '../components/SearchInput';
+import React, { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -19,9 +20,24 @@ export default function Products({
   handleSearch,
   handleAddToCart,
 }) {
+  const [isLogged, setIsLogged] = React.useState(true);
+  useEffect(() => {
+    let token;
+    try {
+      token = JSON.parse(localStorage.getItem('token'));
+      if (!token) setIsLogged(false);
+    } catch (error) {
+      console.log(error);
+      setIsLogged(false);
+    }
+  }, []);
+
+  if (!isLogged) return <Navigate to="/login" />;
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Box sx={{ mx: '80px', mb: '40px' }}>
+        <h1>Products</h1>
         <SearchInput
           products={products}
           searchValue={searchValue}

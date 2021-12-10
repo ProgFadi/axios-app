@@ -18,7 +18,7 @@ function App(props) {
   useEffect(() => {
     setLoading(true);
     axios
-      .get('https://fakestoreapi.com/products')
+      .get('https://fakestoreapi.com/products?limit=6')
       .then((response) => {
         setProducts(response.data);
       })

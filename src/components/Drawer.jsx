@@ -41,6 +41,7 @@ import { Navigate } from 'react-router-dom';
 import { TOKEN_KEY } from '../utils/Constants';
 import NotFound from './NotFound';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Cart from '../pages/Cart';
 
 const drawerWidth = 240;
 
@@ -141,6 +142,8 @@ function PersistentDrawerLeft({
         return <Dashboard />;
       case '/categories':
         return <Categories />;
+      case '/cart':
+        return <Cart />;
       default:
         return <NotFound />;
     }
