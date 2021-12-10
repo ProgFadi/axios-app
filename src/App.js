@@ -68,6 +68,7 @@ function App(props) {
           />
         }
       />
+      <Route path="/cart" element={<Drawer />} />
       <Route path="/login" element={<Login />} />
     </Routes>
   );

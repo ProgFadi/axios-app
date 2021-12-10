@@ -40,6 +40,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { Navigate } from 'react-router-dom';
 import { TOKEN_KEY } from '../utils/Constants';
 import NotFound from './NotFound';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const drawerWidth = 240;
 
@@ -173,11 +174,20 @@ function PersistentDrawerLeft({
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap component="div"></Typography>
-            <Tooltip title="Logout">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
+            <Box>
+              <Tooltip title="Shopping Cart">
+                <IconButton sx={{ p: 0 }}>
+                  <Link to="/cart">
+                    <ShoppingCartIcon style={{ color: 'white' }} />
+                  </Link>
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Logout">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0, ml: 4 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
+            </Box>
 
             <Menu
               sx={{ mt: '45px' }}
