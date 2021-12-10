@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { useEffect } from 'react'
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import Badge from '@mui/material/Badge';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiAppBar from '@mui/material/AppBar';
@@ -16,23 +16,17 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import { Routes, Link, Route, useLocation, useNavigate } from 'react-router-dom'
-import Dashboard from '../pages/Dashboard'
-import Categories from '../pages/Categories'
-import Products from '../pages/Products'
+import {Link, useNavigate } from 'react-router-dom'
 import LogoutIcon from '@mui/icons-material/Logout';
 import GridViewIcon from '@mui/icons-material/GridView';
 import CategoryIcon from '@mui/icons-material/Category';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
-import Login from '../pages/Login'
 import Avatar from './Avatar'
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Tooltip from '@mui/material/Tooltip';
-import {navigate} from 'react-router-dom'
 import {TOKEN_KEY} from '../utils/Constants'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const drawerWidth = 240;
 
@@ -83,158 +77,158 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-function PersistentDrawerLeft(props) {
-  const location = useLocation()
-  const navigate = useNavigate()
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+const withDrawer = (Component)=> {
+  
+  const EnhanceComponent = (props)=> {
+      const navigate = useNavigate()
+      const theme = useTheme();
+      const [anchorElUser, setAnchorElUser] = React.useState(null);
+      const storedOpen = JSON.parse(localStorage.getItem('drawerOpen'));
+      const [open, setOpen] = React.useState( storedOpen ?? false);
 
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+      const handleDrawerOpen = () => {
+        setOpen(true);
+        localStorage.setItem('drawerOpen', true);
+      };
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+      const handleDrawerClose = () => {
+        setOpen(false);
+        localStorage.setItem('drawerOpen', false);
+      };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+      const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+      };
+      const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+      };
 
-  const logout = () => {
-    localStorage.removeItem(TOKEN_KEY)
-    navigate('/login')
-    handleCloseUserMenu()
-  }
-  useEffect(() => {
 
-  }, [])
-  const renderContent = (routeName) => {
-    console.log(routeName)
-    switch (routeName) {
-      case '/login':
-        return <Login />
-      case '/products':
-        return <Products />
-      case '/dashboard':
-        return <Dashboard />
-      case '/categories':
-        return <Categories />
-    }
-  }
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-  return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar >
-          <Box sx={{
-            flexGrow: 1,
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between'
-          }}>
+      const logout = () => {
+        localStorage.removeItem(TOKEN_KEY)
+        localStorage.removeItem('drawerOpen')
+        navigate('/login')
+        handleCloseUserMenu()
+      }
 
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              sx={{ mr: 2, ...(open && { display: 'none' }) }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap component="div">
-
-            </Typography>
-            <Tooltip title="Logout">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+    return (
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBar position="fixed" open={open}>
+          <Toolbar >
+            <Box sx={{
+              flexGrow: 1,
+              display: 'flex',
+              flexDirection: 'row',
+            }}>
+  
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                sx={{ mr: 2, ...(open && { display: 'none' }) }}
+              >
+                <MenuIcon />
               </IconButton>
-            </Tooltip>
-
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              <MenuItem key='Logout' onClick={logout}>
-                <Typography textAlign="center">Logout</Typography>
-              </MenuItem>
-            </Menu>
-          </Box>
-
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
+              <Typography variant="h6" noWrap component="div">
+  
+              </Typography>
+              <Tooltip title="Logout">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
+  
+              <Menu
+                sx={{ mt: '45px' }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                <MenuItem key='Logout' onClick={logout}>
+                  <Typography textAlign="center">Logout</Typography>
+                </MenuItem>
+              </Menu>
+            </Box>
+            <Box>
+                <IconButton component={Link} to="/cart" sx={{color: '#fff'}} aria-label="cart">
+                    <Badge variant="dot" color="secondary">
+                      <ShoppingCartIcon />
+                    </Badge>
+                </IconButton>
+            </Box>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          sx={{
             width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={open}
-      >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          <ListItem component={Link} to="/dashboard" key='dashboard'>
-            <ListItemIcon>
-              <GridViewIcon />
-            </ListItemIcon>
-            <ListItemText primary='Dashboard' />
-          </ListItem>
-          <ListItem component={Link} to="/categories" key='categories'>
-            <ListItemIcon>
-              <CategoryIcon />
-            </ListItemIcon>
-            <ListItemText primary='Categories' />
-          </ListItem>
-          <ListItem component={Link} to="/products" key='products'>
-            <ListItemIcon>
-              <ProductionQuantityLimitsIcon />
-            </ListItemIcon>
-            <ListItemText primary='Products' />
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <ListItem component={Link} to="/login" key='logout'>
-            <ListItemIcon>
-              <LogoutIcon />
-            </ListItemIcon>
-            <ListItemText primary='Logout' />
-          </ListItem>
-        </List>
-      </Drawer>
-      <Main open={open}>
-        <DrawerHeader />
-        {renderContent(location.pathname)}
-      </Main>
-    </Box>
-  );
+            flexShrink: 0,
+            '& .MuiDrawer-paper': {
+              width: drawerWidth,
+              boxSizing: 'border-box',
+            },
+          }}
+          variant="persistent"
+          anchor="left"
+          open={open}
+        >
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            </IconButton>
+          </DrawerHeader>
+          <Divider />
+          <List>
+            <ListItem component={Link} to="/dashboard" key='dashboard'>
+              <ListItemIcon>
+                <GridViewIcon />
+              </ListItemIcon>
+              <ListItemText primary='Dashboard' />
+            </ListItem>
+            <ListItem component={Link} to="/categories" key='categories'>
+              <ListItemIcon>
+                <CategoryIcon />
+              </ListItemIcon>
+              <ListItemText primary='Categories' />
+            </ListItem>
+            <ListItem component={Link} to="/products" key='products'>
+              <ListItemIcon>
+                <ProductionQuantityLimitsIcon />
+              </ListItemIcon>
+              <ListItemText primary='Products' />
+            </ListItem>
+          </List>
+          <Divider />
+          <List>
+            <ListItem component={Link} to="/login" key='logout' onClick={logout} >
+              <ListItemIcon>
+                <LogoutIcon />
+              </ListItemIcon>
+              <ListItemText primary='Logout' />
+            </ListItem>
+          </List>
+        </Drawer>
+        <Main open={open}>
+          <DrawerHeader />
+          <Component {...props} />
+        </Main>
+      </Box>
+    );
+  }
+
+  return EnhanceComponent
+
 }
 
-export default PersistentDrawerLeft
+export default withDrawer

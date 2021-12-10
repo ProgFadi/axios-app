@@ -1,32 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import {Navigate} from 'react-router-dom'
-function Dashboard(props) {
-    const [isLogged, setIsLogged] = React.useState(true)
-    useEffect(()=>{
-        console.log('1')
-        let token;
-        try {
-        token = JSON.parse(localStorage.getItem('token'))
-        console.log('2')
-        if(!token)
-         setIsLogged(false)
+import React from 'react';
+import withDrawer from '../components/Drawer';
+import withAuth from '../components/withAuth'
 
-        } catch (error) {
-            console.log(error)
-            setIsLogged(false)
-        }
-    
-    },[])
-    console.log('3')
-
-    if(!isLogged)
-        return <Navigate to="/login"/>
-
+let Dashboard = (props)=> {
     return (
         <div>
             Dashboard
         </div>
     );
 }
+
+Dashboard = withAuth(withDrawer(Dashboard))
 
 export default Dashboard;

@@ -1,17 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import withDrawer from '../components/Drawer';
+import withAuth from '../components/withAuth'
 
-function Categories(props) {
-    console.log(props)
-    useEffect(()=>{
-        console.log('use effect')
-        let userData = JSON.parse(localStorage.getItem('myData'))
-        console.log(userData)
-    },[])
+let Categories = (props)=> {
     return (
         <div>
             Categories
         </div>
     );
 }
+
+Categories = withAuth(withDrawer(Categories))
 
 export default Categories;
