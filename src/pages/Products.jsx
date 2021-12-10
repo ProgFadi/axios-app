@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import ProductMainPage from '../components/productComps/productPage';
 
-function Products(props) {
-    
+function Products(props) {    
     return (
-        <div>
-            Products
-        </div>
+      <div className="App">
+          <ProductMainPage />
+      </div>
     );
 }
 

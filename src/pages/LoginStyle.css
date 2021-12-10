@@ -1,0 +1,30 @@
+.form-login{
+    margin: 10px;
+}
+
+form input{
+    padding: 12px 20px;
+    margin-right: 10px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* .first{
+    margin-left: 100px;
+} */
+
+#login-form-submit{
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    /* width: 100%; */
+}
+
+#login-form-submit:hover {
+    opacity: 0.8;
+  }
+
