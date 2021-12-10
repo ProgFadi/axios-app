@@ -1,27 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { TOKEN_KEY } from "../utils/Constants";
-import Inputs from "../components/Inputs";
-import Buttons from "../components/Buttons";
+
 import Button from "@mui/material/Button";
-import { shadows } from "@mui/system";
-import { borders } from "@mui/system";
 
 // import Product from "../components/Product";
 import Product from "../components/ProductCard";
-import axios from "../utils/axios";
+
 import "../App.css";
-import { experimentalStyled as styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
 let total;
 
 function CartPage(props) {
@@ -41,10 +29,13 @@ function CartPage(props) {
     localStorage.setItem("carts", JSON.stringify(Cart));
   }, [Cart]);
 
+  // find sum
   sum = Cart.reduce((prev, current) => {
     return prev + +current.price;
   }, 0);
   sum = (Math.round(sum * 100) / 100).toFixed(2);
+
+  //find discount and total
   let discount = sum / 2;
   total = (Math.round((sum - discount) * 100) / 100).toFixed(2);
   return (
@@ -55,6 +46,7 @@ function CartPage(props) {
         gap: 3,
       }}
     >
+      {/* products in cart interface */}
       <Box sx={{ width: 1 }}>
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
           {Cart.map((item, index) => {
@@ -62,6 +54,7 @@ function CartPage(props) {
           })}
         </Grid>
       </Box>
+      {/* cart details interface */}
       <Box
         sx={{
           display: "flex",

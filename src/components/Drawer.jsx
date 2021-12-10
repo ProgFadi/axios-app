@@ -1,5 +1,5 @@
-import * as React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -16,9 +16,8 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import { Routes, Link, Route, useLocation, useNavigate } from "react-router-dom";
+
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
 import Categories from "../pages/Categories";
 import Products from "../pages/Products";
@@ -33,14 +32,13 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Tooltip from "@mui/material/Tooltip";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { navigate } from "react-router-dom";
+
 import { TOKEN_KEY } from "../utils/Constants";
-import { palette } from "@mui/system";
-import axios from "../utils/axios";
+
 import Badge from "@mui/material/Badge";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
-import CloseIcon from "@mui/icons-material/Close";
+
 import MuiAlert from "@mui/material/Alert";
 const drawerWidth = 240;
 
@@ -94,14 +92,13 @@ let counter, currentcounter;
 
 function PersistentDrawerLeft(props) {
   const location = useLocation();
+
   const navigate = useNavigate();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [openSnack, setSnack] = React.useState(false);
 
-  const handleClick = () => {
-    setSnack(true);
-  };
+  //for snackbar functionalties
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -110,7 +107,12 @@ function PersistentDrawerLeft(props) {
 
     setSnack(false);
   };
+  const handleClick = () => {
+    setSnack(false);
+    setSnack(true);
+  };
 
+  //counting cart items
   counter = localStorage.getItem("carts");
   if (counter) {
     currentcounter = JSON.parse(counter);
@@ -155,7 +157,21 @@ function PersistentDrawerLeft(props) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
+  //check if logged in
+  const [isLogged, setIsLogged] = React.useState(true);
+  useEffect(() => {
+    console.log("1");
+    let token;
+    try {
+      token = JSON.parse(localStorage.getItem("token"));
+      console.log("2");
+      if (!token) setIsLogged(false);
+    } catch (error) {
+      console.log(error);
+      setIsLogged(false);
+    }
+  }, [isLogged]);
+  if (!isLogged) return <Navigate to="/login" />;
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -203,7 +219,7 @@ function PersistentDrawerLeft(props) {
                       sx={{
                         height: 40,
                         width: 40,
-                        color: location.pathname == "/CartPage" ? "green" : "white",
+                        color: location.pathname === "/CartPage" ? "green" : "white",
                       }}
                     />
                   </Badge>
@@ -291,7 +307,7 @@ function PersistentDrawerLeft(props) {
         <DrawerHeader />
         {renderContent(location.pathname)}
       </Main>
-      <Snackbar open={openSnack} autoHideDuration={2000} onClose={handleClose}>
+      <Snackbar open={openSnack} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
           Product has been sent to cart
         </Alert>

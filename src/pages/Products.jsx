@@ -1,36 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { TOKEN_KEY } from "../utils/Constants";
 import Inputs from "../components/Inputs";
-import Buttons from "../components/Buttons";
+
 import { Navigate } from "react-router-dom";
 
 // import Product from "../components/Product";
 import Product from "../components/ProductCard";
 import axios from "../utils/axios";
 import "../App.css";
-import { experimentalStyled as styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-import Grid from "@mui/material/Grid";
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
+import Grid from "@mui/material/Grid";
 
 function Products(props) {
   const [Products, setProducts] = useState([]);
   const [search_value, setSearch] = useState("");
   const [items_filter, setFilter] = useState([]);
-
+  //check if cart already has products in local storage or just create new one
   const [Cart, setCart] = useState(() => {
     const localData = localStorage.getItem("carts");
     return localData ? JSON.parse(localData) : [];
   }, []);
+
+  //add product to cart
   const onAdd = (product) => {
-    if (Cart.filter((item) => item.id == product.id) != "") {
+    if (Cart.filter((item) => item.id === product.id) != "") {
       return;
     }
     Cart.push(product);
@@ -38,6 +32,8 @@ function Products(props) {
     localStorage.setItem("carts", JSON.stringify(Cart));
     props.handleClick();
   };
+
+  //searching for products
   function onSearchChange(e) {
     let newValue = e.target.value;
     let name = Products;
@@ -51,36 +47,19 @@ function Products(props) {
     setSearch(newValue);
     setFilter([...filtered]);
   }
+
+  //get products from the api
   useEffect(() => {
     axios
       .get("/products")
       .then((res) => {
-        if (Products.length == 0) {
-          setProducts(res.data);
-          setFilter(res.data);
-        }
+        setProducts(res.data);
+        setFilter(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, [Products]);
-
-  const [isLogged, setIsLogged] = React.useState(true);
-  useEffect(() => {
-    console.log("1");
-    let token;
-    try {
-      token = JSON.parse(localStorage.getItem("token"));
-      console.log("2");
-      if (!token) setIsLogged(false);
-    } catch (error) {
-      console.log(error);
-      setIsLogged(false);
-    }
-  }, []);
-  console.log("3");
-
-  if (!isLogged) return <Navigate to="/login" />;
 
   return (
     <Box
