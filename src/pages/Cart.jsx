@@ -1,4 +1,3 @@
-import Paper from "../components/Paper";
 
 function Cart({onRemove, cartItems}) {
    

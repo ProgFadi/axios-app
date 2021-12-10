@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
-
 function Products({onAdd}) {
     const [isLogged, setIsLogged] = useState(true)
     const [data, setData] = useState([]);

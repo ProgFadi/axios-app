@@ -18,7 +18,6 @@ body{
 .pro{
     display:grid;
     grid-template-columns:repeat(5, 1fr)
-
 }
 .pro-cart{
     display:grid;
