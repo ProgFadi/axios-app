@@ -1,9 +1,8 @@
-import {FaTimes} from 'react-icons/fa'
-
+import ClearIcon from '@mui/icons-material/Clear';
 const DeleteProduct = ({product,onDelete}) => {
     return (
         <div className={'deleteDiv'}>
-        <FaTimes style={{cursor:'pointer', color:'red'}} onClick={() => onDelete(product)} className={'deletex'} />
+        <ClearIcon style={{cursor:'pointer', color:'red'}} onClick={() => onDelete(product)} className={'deletex'} />
      </div>
     )
 }
