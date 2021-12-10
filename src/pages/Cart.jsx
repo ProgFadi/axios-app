@@ -107,6 +107,8 @@ function CartPage(props) {
                 <MessageSow message="Removed From Cart Secesfully" />
             </div>
             <div className="flex-continer" >
+                <div className="testIt-2">
+                </div>
                 <div className="testIt">
                     <DetailsCart len={productsArray.length} total={total} dis={dis} final={final} />
                 </div>
