@@ -6,11 +6,13 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { CardActionArea, CardActions } from '@mui/material';
+import { Box, CardActionArea, CardActions } from '@mui/material';
 import Snackbar from '@mui/material/Snackbar';
 import { Alert } from '@mui/material';
+import { useLocation } from 'react-router-dom';
 
 const Product = (props)=> {
+    let location = useLocation()
     const [open, setOpen] = React.useState(false);
 
     const addToCart = (product)=> {
@@ -73,12 +75,13 @@ const Product = (props)=> {
                     alt="product"
                 />
                 <CardContent sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                    <div>
+                    <Box>
                     <Typography variant="subtitle2" color="text.secondary">{props.category}</Typography>
                     <Typography variant="h5">{props.title}</Typography>
-                    </div>
+                    </Box>
                     <Typography variant="overline" display="block" color="text.secondary">${props.price}</Typography>
                 </CardContent>
+                {location.pathname=='/cart'  && <Typography variant="h5" display="block" color="text.secondary">qty: {props.product.qty}</Typography>}
             </CardActionArea>
             <CardActions>
                 <Button sx={{width: '100%'}} variant="contained" startIcon={props.type==='add'? <AddIcon /> : <RemoveIcon />}  onClick={handleClick} >{props.btn}</Button>
