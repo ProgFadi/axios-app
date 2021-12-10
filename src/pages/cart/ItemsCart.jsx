@@ -1,4 +1,4 @@
-import React from 'react'
+import Box from '@mui/material/Box';
 import ProductImage from '../ProductPage/ProductImage'
 import ProductDetials from '../ProductPage/ProductDetials'
 import Button from '../ProductPage/Button'
@@ -29,7 +29,13 @@ const ItemsCart = () => {
         
     }
     return (
-              <div className={'productsDiv'}>
+        <Box sx={{
+            width:'75%',
+            
+        }}>
+              <div className={'productsDiv'} style={{border: '1px solid gray',
+            borderRadius: '10px',
+            backgroundColor: '#f8f8f8',}}>
              {productCart.map((product, index)=>(
                  
                  <div className={'product'} key={index}>
@@ -45,6 +51,7 @@ const ItemsCart = () => {
                  )
                  )}  
                  </div>
+                 </Box>
         
     )
 }
