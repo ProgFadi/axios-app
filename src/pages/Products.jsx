@@ -1,12 +1,17 @@
-import React, { useEffect } from 'react';
-
+import React, { useEffect, useState } from "react";
+import { Navigate } from "react-router";
 function Products(props) {
-    
-    return (
-        <div>
-            Products
-        </div>
-    );
+  let [isLogged, setIsLogged] = useState(true);
+  useEffect(() => {
+    let token = JSON.parse(localStorage.getItem("token"));
+    if (!token) {
+      setIsLogged(false);
+    }
+  }, []);
+  if (!isLogged) {
+    return <Navigate to="/login" />;
+  }
+  return <div>Products</div>;
 }
 
 export default Products;
