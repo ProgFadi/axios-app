@@ -1,0 +1,15 @@
+.button-test {
+    width: 257px;
+    height: 50px;
+    background-color: #096063;
+    color: #FFFFFF;
+    border: 0.1em solid #FFFFFF;
+    border-radius: 2px;
+    font-size: larger;
+    display: inline-block;
+    transition-duration: 0.4s;
+}
+
+.button-test:hover {
+    background-color: #096063d5; /* Green */
+  }

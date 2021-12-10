@@ -1,24 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
-import Dashboard from './pages/Dashboard'
-import Categories from './pages/Categories'
-import Products from './pages/Products'
 import Login from './pages/Login'
-import {Navigate, Route, Routes} from 'react-router-dom'
-import {useEffect,useState} from 'react'
-import Drawer from './components/Drawer'
-
+import {Route, Routes} from 'react-router-dom'
+import PersistentDrawerLeft from './components/Drawer';
 
 function App(props) {
+  return  (
+  <div>
+  <Routes>
+    <Route path="/dashboard" element={<PersistentDrawerLeft/>}/>
+    <Route path="/categories" element={<PersistentDrawerLeft   {...props}/>}/>
+    <Route path="/products" element={<PersistentDrawerLeft/>}/>
+    <Route path="/cart" element={<PersistentDrawerLeft/>}/>
+    <Route path="/login" element={<Login/>}/>
+    <Route path="/" element={<Login/>}/>
+  </Routes>
 
-
-  return  <Routes>
-   <Route path="/dashboard" element={<Drawer/>}/>
-   <Route path="/categories" element={<Drawer   {...props}/>}/>
-   <Route path="/products" element={<Drawer/>}/>
-   <Route path="/login" element={<Login/>}/>
-
-</Routes>
+    {/* <p>Hello Worl</p> */}
+  </div>
+  )
 }
 
 export default App;

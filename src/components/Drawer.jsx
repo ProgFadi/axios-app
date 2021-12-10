@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useEffect } from 'react'
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -16,9 +15,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import { Routes, Link, Route, useLocation, useNavigate } from 'react-router-dom'
+import {Link, useLocation, useNavigate } from 'react-router-dom'
 import Dashboard from '../pages/Dashboard'
 import Categories from '../pages/Categories'
 import Products from '../pages/Products'
@@ -31,12 +28,12 @@ import Avatar from './Avatar'
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Tooltip from '@mui/material/Tooltip';
-import {navigate} from 'react-router-dom'
 import {TOKEN_KEY} from '../utils/Constants'
+import CartIcon from './CartIcon';
+import CartPage from '../pages/Cart';
+
 
 const drawerWidth = 240;
-
-
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -104,9 +101,11 @@ function PersistentDrawerLeft(props) {
     navigate('/login')
     handleCloseUserMenu()
   }
-  useEffect(() => {
 
-  }, [])
+  // useEffect(() => {
+
+  // }, [])
+
   const renderContent = (routeName) => {
     console.log(routeName)
     switch (routeName) {
@@ -118,6 +117,8 @@ function PersistentDrawerLeft(props) {
         return <Dashboard />
       case '/categories':
         return <Categories />
+      case '/cart':
+        return <CartPage />
     }
   }
   const handleOpenUserMenu = (event) => {
@@ -150,11 +151,20 @@ function PersistentDrawerLeft(props) {
             <Typography variant="h6" noWrap component="div">
 
             </Typography>
-            <Tooltip title="Logout">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
+              <div>
+                  <Tooltip title="Cart">
+                    <IconButton onClick={()=> navigate('/cart')} sx={{ marginRight: 3}}>
+                  <CartIcon />
+                    {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
+                  </IconButton>
+                </Tooltip>
+
+                <Tooltip title="Logout">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  </IconButton>
+                </Tooltip>
+              </div>
 
             <Menu
               sx={{ mt: '45px' }}
