@@ -12,7 +12,8 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function ResponsiveGrid() {
+export default function ResponsiveGrid({ products }) {
+  console.log(products);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid

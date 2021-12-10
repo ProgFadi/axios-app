@@ -39,6 +39,7 @@ import Menu from '@mui/material/Menu';
 import Tooltip from '@mui/material/Tooltip';
 import { Navigate } from 'react-router-dom';
 import { TOKEN_KEY } from '../utils/Constants';
+import NotFound from './NotFound';
 
 const drawerWidth = 240;
 
@@ -87,7 +88,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-function PersistentDrawerLeft(props) {
+function PersistentDrawerLeft({ products }) {
   const location = useLocation();
   const navigate = useNavigate();
   const theme = useTheme();
@@ -110,16 +111,18 @@ function PersistentDrawerLeft(props) {
   };
   useEffect(() => {}, []);
   const renderContent = (routeName) => {
-    console.log(routeName);
+    // console.log(routeName);
     switch (routeName) {
       case '/login':
         return <Login />;
       case '/products':
-        return <Products />;
+        return <Products products={products} />;
       case '/dashboard':
         return <Dashboard />;
       case '/categories':
         return <Categories />;
+      default:
+        return <NotFound />;
     }
   };
   const handleOpenUserMenu = (event) => {
@@ -233,7 +236,7 @@ function PersistentDrawerLeft(props) {
           </ListItem>
         </List>
       </Drawer>
-      <Main open={open}>
+      <Main open={open} products={products}>
         <DrawerHeader />
         {renderContent(location.pathname)}
       </Main>
