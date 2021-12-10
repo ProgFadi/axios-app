@@ -16,8 +16,6 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import { Routes, Link, Route, useLocation, useNavigate } from 'react-router-dom'
 import Dashboard from '../pages/Dashboard'
 import Categories from '../pages/Categories'
@@ -148,14 +146,18 @@ function PersistentDrawerLeft(props) {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap component="div">
-
             </Typography>
+            <Tooltip>
+              <IconButton style={{color:'green'}}  component={Link}
+                          to="/cart">Icons cart</IconButton>
+            </Tooltip>
+
             <Tooltip title="Logout">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
-            </Tooltip>
 
+            </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
