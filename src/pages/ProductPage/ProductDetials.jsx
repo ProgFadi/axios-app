@@ -1,5 +1,3 @@
-import React from 'react'
-
 const ProductDetials = ({product}) => {
     return (
         <div className={'prodName'}>

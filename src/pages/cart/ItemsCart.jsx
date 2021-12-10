@@ -3,30 +3,27 @@ import ProductImage from '../ProductPage/ProductImage'
 import ProductDetials from '../ProductPage/ProductDetials'
 import Button from '../ProductPage/Button'
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 
 
 const ItemsCart = () => {
+    
     const [productCart,setProductCart] = useState(JSON.parse(localStorage.getItem('CartData')))
 
     useEffect(() => {
         setProductCart(productCart)
     
       },[productCart])
+      
 
    const onClick = (id) => {
-       let a = productCart.filter((product) => product.id !== id.id )
-       setProductCart(a)
-       console.log(a)
+       
 
-      localStorage.setItem('CartData', JSON.stringify(a) )
-
-    // var index = productCart.indexOf(product);
-    // console.log(productCart)
-    // console.log(product)
-    // if (index > -1)
-    //     productCart.splice(index, 1);
-    // localStorage.setItem('CartData', JSON.stringify(productCart) )
-        
+       let filter = productCart.filter((product) => product.id !== id.id )
+       setProductCart(filter)
+       console.log(filter)
+      localStorage.setItem('CartData', JSON.stringify(filter) )
     }
     return (
         <Box sx={{
@@ -36,7 +33,8 @@ const ItemsCart = () => {
               <div className={'productsDiv'} style={{border: '1px solid gray',
             borderRadius: '10px',
             backgroundColor: '#f8f8f8',}}>
-             {productCart.map((product, index)=>(
+                
+             {productCart.length ? productCart.map((product, index)=>(
                  
                  <div className={'product'} key={index}>
          <div> 
@@ -49,7 +47,8 @@ const ItemsCart = () => {
         </div>
 
                  )
-                 )}  
+                 ): <Link to='/product'>Your Cart is empty Go to Shop</Link>  }
+
                  </div>
                  </Box>
         

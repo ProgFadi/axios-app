@@ -20,7 +20,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Dashboard from '../pages/Dashboard'
 import Categories from '../pages/Categories'
 import Product from "../pages/ProductPage/Product";
-import LogoutIcon from '@mui/icons-material/Logout';
 import GridViewIcon from '@mui/icons-material/GridView';
 import CategoryIcon from '@mui/icons-material/Category';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
@@ -107,6 +106,8 @@ function PersistentDrawerLeft(props) {
   }, [])
   const renderContent = (routeName) => {
     switch (routeName) {
+      case '/':
+        return <Dashboard />
       case '/login':
         return <Login />
       case '/product':
@@ -118,6 +119,7 @@ function PersistentDrawerLeft(props) {
       case '/cart':
         return <Cart />
         default:
+           
     }
   }
   const cartBtn = () => {
@@ -237,11 +239,11 @@ function PersistentDrawerLeft(props) {
         </List>
         <Divider />
         <List>
-          <ListItem component={Link} to="/login" key='logout'>
+          <ListItem component={Link} to="/cart">
             <ListItemIcon>
-              <LogoutIcon />
+              <ShoppingCartIcon />
             </ListItemIcon>
-            <ListItemText primary='Logout' />
+            <ListItemText primary='My Cart' />
           </ListItem>
         </List>
       </Drawer>

@@ -3,9 +3,12 @@ import './styles.css'
 import { useEffect, useState } from 'react';
 import Products from './Products';
 import axios from 'axios'
+import {Navigate} from 'react-router-dom'
+
 
 function Product() {
-
+  const [isLogged, setIsLogged] = useState(true)
+  
   
   axios({
     method: 'get',
@@ -18,14 +21,33 @@ function Product() {
   })
   .catch((err)=>{
     console.log(err)
-})
-const [products,setProducts] = useState(JSON.parse(localStorage.getItem('data')))
-const [itemFound,setItemFound] = useState(products)
+  })
+  const [products,setProducts] = useState(JSON.parse(localStorage.getItem('data')))
+  const [itemFound,setItemFound] = useState(products)
+  
+  useEffect(()=>{
+  console.log('1')
+      let token;
+      try {
+      token = localStorage.getItem('Token')
+      console.log(token)
+      if(!token)
+       setIsLogged(false)
+
+      } catch (error) {
+          console.log(error)
+          setIsLogged(false)
+      }
+  
+  },[])
+  console.log('3')
 
   useEffect(() => {
     setItemFound(products)
 
   },[products])
+  if(!isLogged)
+      return <Navigate to="/login"/>
 
     const deleteProduct = (id) => {
       setProducts(products.filter((product) => product.id !== id ))

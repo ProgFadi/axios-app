@@ -1,8 +1,37 @@
 import Box from '@mui/material/Box';
 import DetailsPaper from './DetailsPaper'
 import ItemsCart from './ItemsCart'
+import React, { useEffect, useState } from 'react';
+import {Navigate} from 'react-router-dom'
+
 
 const Cart = () => {
+    const [isLogged, setIsLogged] = useState(true)
+    useEffect(()=>{
+        console.log('1')
+        let token;
+        try {
+        token = localStorage.getItem('Token')
+        console.log(token)
+        if(!token)
+         setIsLogged(false)
+
+        } catch (error) {
+            console.log(error)
+            setIsLogged(false)
+        }
+    
+    },[])
+    console.log('3')
+
+    if(!isLogged)
+        return <Navigate to="/login"/>
+    let cart = JSON.parse(localStorage.getItem('CartData'))
+    let length = cart.length
+    let price = 0
+    cart.map((item)=>(
+        price+=item.price
+    ))
     return (
         <Box sx={{
             display:'flex',
@@ -11,7 +40,7 @@ const Cart = () => {
             justifyContent: 'space-between',
         }}>
         <ItemsCart />
-        <DetailsPaper />
+        <DetailsPaper length={length} price={price.toFixed(3)} />
         </Box>
     )
 }

@@ -3,7 +3,10 @@ import CountItems from './CountItems';
 import TotalAmount from './TotalAmount';
 
 
-const DetailsPaper = () => {
+const DetailsPaper = ({length,price}) => {
+
+
+    
     return (
         <Box sx={{
             display:'flex',
@@ -18,11 +21,11 @@ const DetailsPaper = () => {
             <Box>
             <h1>Details</h1>
             <Box>
-            <CountItems />
+            <CountItems length={length} price={price} />
             </Box>
             </Box>
             <Box>
-                <TotalAmount />
+                <TotalAmount price={price} />
             </Box>
 
 

@@ -1,13 +1,8 @@
 import Box from '@mui/material/Box';
 
-const CountItems = () => {
+const CountItems = ({length,price}) => {
 
-    let cart = JSON.parse(localStorage.getItem('CartData'))
-    let length = cart.length
-    let price = 0
-    cart.map((item)=>(
-        price+=item.price
-    ))
+   
 
     return (
         <Box sx={{
@@ -16,7 +11,7 @@ const CountItems = () => {
             flexDirection: 'column',
         }}>
             <Box className={'cartTotal'}>
-                <h3 className={'divPaperh3'}>iItems Number :</h3> 
+                <h3 className={'divPaperh3'}>Items Number :</h3> 
                 <h3>{length}</h3> 
             </Box>
             <Box className={'cartTotal'}>
