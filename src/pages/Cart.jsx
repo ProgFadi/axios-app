@@ -77,14 +77,18 @@ function CartPage(props) {
         for (prod of arrayInpt){
             total += prod.price
         }
-        return total;
+        return rounNumber(total);
     }
 
     function findFinal(total, dis){
         let finalAmoun = total - dis
         if (finalAmoun > 0)
-            return finalAmoun
+            return rounNumber(finalAmoun)
         return 0
+    }
+
+    function rounNumber(num){
+        return Math.round(num * 100) / 100
     }
 
 
