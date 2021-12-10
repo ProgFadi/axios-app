@@ -1,35 +1,31 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from '../utils/axios'
-import {TOKEN_KEY} from '../utils/Constants'
-function Login(props) {
+import axios from '../axios/axios'
+import {CART_PRODUCTS, TOKEN_KEY} from '../axios/Constants'
+
+function Login() {
     const navigate = useNavigate()
-    const [email, setEmail] = React.useState('')
+    const [username, setUserName] = React.useState('')
     const [password, setPassword] = React.useState('')
 
     const login = (e)=>{
         e.preventDefault()
-        axios.post('/api/academy/auth/login',
-        {
-            email:email,
+        axios.post('/auth/login', {
+            username:username,
             password:password
-        }
-        )
-        .then((response)=>{
-            console.log(response)
-            let token = response.data.token.access_token;
-            let data = response.data;
+        }).then((response)=>{
+            let data = response.data.token;
             localStorage.setItem(TOKEN_KEY, JSON.stringify(data))
-            navigate('/dashboard')
-        })
-        .catch((err)=>{
+            localStorage.setItem(CART_PRODUCTS, JSON.stringify([]));
+            navigate('/products')
+        }).catch((err)=>{
             console.log(err)
         })
     }
     return (
         <div>
           <form>
-              <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" />
+              <input value={username} onChange={(e)=>setUserName(e.target.value)} type="text" />
               <input value={password} onChange={(e)=>setPassword(e.target.value)} type="password" />
               <input type="submit" onClick={login}/>
           </form>
