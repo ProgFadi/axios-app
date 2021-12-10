@@ -110,10 +110,6 @@ function PersistentDrawerLeft(props) {
     setSnack(false);
   };
 
-  //const to check if there is items in the cart
-  let cartdata = localStorage.getItem("carts");
-  let currentcart = cartdata ? JSON.parse(cartdata) : [];
-
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleDrawerOpen = () => {
@@ -193,7 +189,7 @@ function PersistentDrawerLeft(props) {
                 }}
               >
                 <Stack spacing={2} direction="row">
-                  <Badge badgeContent={currentcart.length} color="secondary">
+                  <Badge badgeContent={5} color="secondary">
                     <ShoppingCartIcon
                       color="secondary"
                       sx={{

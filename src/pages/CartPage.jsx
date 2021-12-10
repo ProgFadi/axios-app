@@ -22,25 +22,30 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
-let discount = 20;
 let total;
 
-function CartPage() {
+function CartPage(props) {
   let sum;
+
+  //const to check if there is items in the cart
   const [Cart, setCart] = useState(() => {
     const localData = localStorage.getItem("carts");
     return localData ? JSON.parse(localData) : [];
   }, []);
+
+  //to remove item from cart
   const onRemove = (product) => {
     setCart(Cart.filter((item) => item.id != product.id));
   };
   useEffect(() => {
     localStorage.setItem("carts", JSON.stringify(Cart));
   }, [Cart]);
+
   sum = Cart.reduce((prev, current) => {
     return prev + +current.price;
   }, 0);
   sum = (Math.round(sum * 100) / 100).toFixed(2);
+  let discount = sum / 2;
   total = (Math.round((sum - discount) * 100) / 100).toFixed(2);
   return (
     <Box

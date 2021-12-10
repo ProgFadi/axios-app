@@ -11,7 +11,6 @@ import Drawer from "./components/Drawer";
 function App(props) {
   return (
     <Routes>
-      <Route path="/" element={<Drawer />} />
       <Route path="/Dashboard" element={<Drawer />} />
       <Route path="/categories" element={<Drawer {...props} />} />
       <Route path="/products" element={<Drawer />} />

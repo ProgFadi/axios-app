@@ -34,22 +34,20 @@ export default function ImgMediaCard(props) {
       <Item sx={{ m: 0, p: 0 }}>
         <Card
           sx={{
-            height: 300,
+            height: 500,
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-around",
+            justifyContent: "space-between",
             backgroundColor: "White",
           }}
         >
           <CardMedia
             component="img"
             alt="green iguana"
-            height="140"
             src={props.product.image}
             sx={{
               width: 1,
-              height: 1,
-
+              height: 1 / 2,
               objectFit: "contain",
             }}
           />
