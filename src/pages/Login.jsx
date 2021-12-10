@@ -1,35 +1,44 @@
+import { useNavigate } from 'react-router-dom';
+// import axios from '../utils/axios'
 import * as React from 'react'
+import {useState} from 'react'
 import './Login.css'
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
-import axios from '../utils/axios'
+import axios from 'axios'
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-
-
 function Login(props) {
-    const [email, setEmail] = React.useState('')
-    const [password, setPassword] = React.useState('')
+    const navigate = useNavigate()
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     const login = (e)=>{
         e.preventDefault()
-        axios.post('/api/academy/auth/login',
-        {
-            email:email,
-            password:password
-        }
-        )
+        if (!email || !password) return alert('Please enter Email and Password')
+        else{
+            axios({
+                method: 'post',
+                url: 'https://fakestoreapi.com/auth/login',
+                data: {
+                    username: email,
+                    password: password
+                }
+              })
         .then((response)=>{
             console.log(response)
-            // let token = response.data.token.access_token;
+            let token = response.data.token;
+            console.log(token)
             let data = response.data;
-            localStorage.setItem('token', JSON.stringify(data))
+            console.log(data)
+            localStorage.setItem('Token', token)
+            navigate('/dashboard')
         })
         .catch((err)=>{
             console.log(err)
-        })
+        })}
     }
     return (
         <Box sx={{
@@ -47,7 +56,7 @@ function Login(props) {
                     <p>Sign in on the internal platform</p>
                 </Box>
                 <Box>
-                <form className='formStyle'>
+                <form className='formStyle' onSubmit={login}>
                     <TextField  label="Email" variant="outlined" value={email} onChange={(e)=>setEmail(e.target.value)} type="email" />
                     <TextField  label="Password" variant="outlined" value={password} onChange={(e)=>setPassword(e.target.value)} type="password" />
                     <Button variant="contained" type="submit" onClick={login}>Login</Button>
@@ -56,7 +65,6 @@ function Login(props) {
                </Paper>
             </Container>
       </Box>
-
     );
 }
 

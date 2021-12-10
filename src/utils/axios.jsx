@@ -1,3 +1,4 @@
 import axios from 'axios'
-axios.defaults.baseURL = 'https://website-backend.computiq.tech';
+import {BASE_URL} from './Constants'
+axios.defaults.baseURL = BASE_URL;
 export default axios

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react'
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -15,15 +16,25 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import {Routes,Link, Route} from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Dashboard from '../pages/Dashboard'
 import Categories from '../pages/Categories'
-import Products from '../pages/Products'
+import Product from "../pages/ProductPage/Product";
 import LogoutIcon from '@mui/icons-material/Logout';
 import GridViewIcon from '@mui/icons-material/GridView';
 import CategoryIcon from '@mui/icons-material/Category';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
+import Login from '../pages/Login'
+import Avatar from './Avatar'
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import Tooltip from '@mui/material/Tooltip';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Cart from '../pages/cart/Cart';
+
 const drawerWidth = 240;
+
+
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -70,10 +81,14 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
- function PersistentDrawerLeft(props) {
-  // let location = useLocation()
+function PersistentDrawerLeft(props) {
+  const location = useLocation()
+  const navigate = useNavigate()
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -82,36 +97,103 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     setOpen(false);
   };
 
-  // const renderContent = (pathName)=>{
-  //   switch(pathName)
-  //   {
-  //     case '/login':
-  //       return <Login/>
-  //     case '/products':
-  //       return <Products/>
-  //     case '/dashboard':
-  //       return <Dashboard/>
-  //     case '/categories':
-  //       return <Categories/>
-  //   }
-  // }
+  const logout = () => {
+    localStorage.removeItem('Token')
+    navigate('/login')
+    handleCloseUserMenu()
+  }
+  useEffect(() => {
+
+  }, [])
+  const renderContent = (routeName) => {
+    switch (routeName) {
+      case '/login':
+        return <Login />
+      case '/product':
+        return <Product />
+      case '/dashboard':
+        return <Dashboard />
+      case '/categories':
+        return <Categories />
+      case '/cart':
+        return <Cart />
+        default:
+    }
+  }
+  const cartBtn = () => {
+    navigate('/cart')
+  }
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
+        <Toolbar >
+          <Box sx={{
+            flexGrow: 1,
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between'
+          }}>
+
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              sx={{ mr: 2, ...(open && { display: 'none' }) }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap component="div">
+            </Typography>
+            <Box>
+              <Tooltip title="My Cart">
+              <IconButton onClick={cartBtn} 
+              sx={{ color: 'white',
+                border: '1px solid gray',
+                borderRadius: '5px',
+                margin: '10px' }}>
+                <ShoppingCartIcon />
+              </IconButton>
+            </Tooltip>
+
+            <Tooltip title="Logout">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              </IconButton>
+            </Tooltip>
+            </Box>
             
-          </Typography>
+              
+
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              <MenuItem key='Logout' onClick={logout}>
+                <Typography textAlign="center">Logout</Typography>
+              </MenuItem>
+            </Menu>
+          </Box>
+
         </Toolbar>
       </AppBar>
       <Drawer
@@ -134,46 +216,38 @@ const DrawerHeader = styled('div')(({ theme }) => ({
         </DrawerHeader>
         <Divider />
         <List>
-        <ListItem component={Link} to="/dashboard" key='dashboard'>
-              <ListItemIcon>
-                <GridViewIcon/>
-              </ListItemIcon>
-              <ListItemText primary='Dashboard' />
-            </ListItem>
-            <ListItem component={Link} to="/categories" key='categories'>
-              <ListItemIcon>
-                <CategoryIcon/>
-              </ListItemIcon>
-              <ListItemText primary='Categories' />
-            </ListItem>
-            <ListItem component={Link} to="/products" key='products'>
-              <ListItemIcon>
-                <ProductionQuantityLimitsIcon/>
-              </ListItemIcon>
-              <ListItemText primary='Products' />
-            </ListItem>
+          <ListItem component={Link} to="/dashboard" key='dashboard'>
+            <ListItemIcon>
+              <GridViewIcon />
+            </ListItemIcon>
+            <ListItemText primary='Dashboard' />
+          </ListItem>
+          <ListItem component={Link} to="/categories" key='categories'>
+            <ListItemIcon>
+              <CategoryIcon />
+            </ListItemIcon>
+            <ListItemText primary='Categories' />
+          </ListItem>
+          <ListItem component={Link} to="/product" key='product'>
+            <ListItemIcon>
+              <ProductionQuantityLimitsIcon />
+            </ListItemIcon>
+            <ListItemText primary='Product' />
+          </ListItem>
         </List>
         <Divider />
         <List>
-        <ListItem component={Link} to="/login" key='logout'>
-              <ListItemIcon>
-                <LogoutIcon/>
-              </ListItemIcon>
-              <ListItemText primary='Logout' />
-            </ListItem>
+          <ListItem component={Link} to="/login" key='logout'>
+            <ListItemIcon>
+              <LogoutIcon />
+            </ListItemIcon>
+            <ListItemText primary='Logout' />
+          </ListItem>
         </List>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-       {/* {renderContent(location.pathname)} */}
-       <Routes>
-   <Route path="/dashboard" element={<Dashboard/>}/>
-   <Route path="/categories" element={<Categories   {...props}/>}/>
-   <Route path="/products" element={<Products/>}/>
-   {/* <Route path="/login" element={<Login/>}/> */}
-
-    </Routes> 
-        
+        {renderContent(location.pathname)}
       </Main>
     </Box>
   );
