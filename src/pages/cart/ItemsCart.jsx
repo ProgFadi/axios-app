@@ -22,7 +22,6 @@ const ItemsCart = () => {
 
        let filter = productCart.filter((product) => product.id !== id.id )
        setProductCart(filter)
-       console.log(filter)
       localStorage.setItem('CartData', JSON.stringify(filter) )
     }
     return (

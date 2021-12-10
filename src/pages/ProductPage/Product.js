@@ -17,7 +17,6 @@ function Product() {
   .then((response)=>{
     let data = response.data;
     localStorage.setItem('data', JSON.stringify(data))
-    console.log(response)
   })
   .catch((err)=>{
     console.log(err)
@@ -26,11 +25,9 @@ function Product() {
   const [itemFound,setItemFound] = useState(products)
   
   useEffect(()=>{
-  console.log('1')
       let token;
       try {
       token = localStorage.getItem('Token')
-      console.log(token)
       if(!token)
        setIsLogged(false)
 
@@ -40,7 +37,6 @@ function Product() {
       }
   
   },[])
-  console.log('3')
 
   useEffect(() => {
     setItemFound(products)
@@ -51,12 +47,10 @@ function Product() {
 
     const deleteProduct = (id) => {
       setProducts(products.filter((product) => product.id !== id ))
-      console.log(products)
       document.getElementById('searchId').value=''
     }
     
     const addProduct = (product) => {
-      console.log(product)
       setProducts([...products,product])
       document.getElementById('searchId').value=''
   }

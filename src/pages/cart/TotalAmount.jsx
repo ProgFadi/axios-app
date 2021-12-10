@@ -7,8 +7,7 @@ const TotalAmount = ({price}) => {
             flexDirection: 'column',
             justifyContent: 'space-between',
             height: '390px',}}>
-{console.log(price)
-}            <Box sx={{display: 'flex',
+           <Box sx={{display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
             alignItems: 'center',

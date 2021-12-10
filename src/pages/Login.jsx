@@ -28,11 +28,7 @@ function Login(props) {
                 }
               })
         .then((response)=>{
-            console.log(response)
             let token = response.data.token;
-            console.log(token)
-            let data = response.data;
-            console.log(data)
             localStorage.setItem('Token', token)
             navigate('/dashboard')
         })

@@ -8,21 +8,17 @@ import {Navigate} from 'react-router-dom'
 const Cart = () => {
     const [isLogged, setIsLogged] = useState(true)
     useEffect(()=>{
-        console.log('1')
         let token;
         try {
         token = localStorage.getItem('Token')
-        console.log(token)
         if(!token)
          setIsLogged(false)
 
         } catch (error) {
-            console.log(error)
             setIsLogged(false)
         }
     
     },[])
-    console.log('3')
 
     if(!isLogged)
         return <Navigate to="/login"/>

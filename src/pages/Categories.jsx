@@ -2,15 +2,12 @@ import React, { useEffect, useState } from 'react';
 import {Navigate} from 'react-router-dom'
 
 
-function Categories(props) {
-    console.log(props)
+function Categories() {
     const [isLogged, setIsLogged] = useState(true)
     useEffect(()=>{
-        console.log('1')
         let token;
         try {
         token = localStorage.getItem('Token')
-        console.log(token)
         if(!token)
          setIsLogged(false)
 
@@ -20,7 +17,6 @@ function Categories(props) {
         }
     
     },[])
-    console.log('3')
 
     if(!isLogged)
         return <Navigate to="/login"/>
