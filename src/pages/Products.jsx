@@ -21,18 +21,18 @@ export default function Products({
   handleAddToCart,
 }) {
   const [isLogged, setIsLogged] = React.useState(true);
-  useEffect(() => {
-    let token;
-    try {
-      token = JSON.parse(localStorage.getItem('token'));
-      if (!token) setIsLogged(false);
-    } catch (error) {
-      console.log(error);
-      setIsLogged(false);
-    }
-  }, []);
+  // useEffect(() => {
+  //   let token;
+  //   try {
+  //     token = JSON.parse(localStorage.getItem('token'));
+  //     if (!token) setIsLogged(false);
+  //   } catch (error) {
+  //     console.log(error);
+  //     setIsLogged(false);
+  //   }
+  // }, []);
 
-  if (!isLogged) return <Navigate to="/login" />;
+  // if (!isLogged) return <Navigate to="/login" />;
 
   return (
     <Box sx={{ flexGrow: 1 }}>

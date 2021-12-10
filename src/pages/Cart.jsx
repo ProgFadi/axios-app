@@ -1,5 +1,12 @@
+import Products from './Products';
+
 const Cart = () => {
-  return <div></div>;
+  const products = JSON.parse(localStorage.getItem('cart'));
+  return (
+    <div>
+      <Products products={products} />
+    </div>
+  );
 };
 
 export default Cart;
