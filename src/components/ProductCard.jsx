@@ -5,20 +5,32 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 
-export default function ProductCard() {
-  const product = {
-    name: 'nike',
-    price: 90,
-  };
-
+export default function ProductCard({ product }) {
+  console.log(product);
   return (
-    <Card sx={{ maxWidth: 300 }}>
+    <Card sx={{ maxWidth: 250 }}>
       <CardActionArea>
-        <CardMedia component="img" height="130" image="" alt="product" />
+        <CardMedia
+          component="img"
+          height="180"
+          image={product.image}
+          alt="product"
+        />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {product.name}
+          <Typography
+            gutterBottom
+            variant="p"
+            component="div"
+            style={{
+              maxWidth: 200,
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}
+          >
+            {product.title}
           </Typography>
+
           <Typography variant="body2" color="text.secondary">
             {product.price}
           </Typography>

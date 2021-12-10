@@ -3,7 +3,8 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import ProductCard from '../components/Card';
+import ProductCard from '../components/ProductCard';
+import SearchInput from '../components/SearchInput';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -12,10 +13,16 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function ResponsiveGrid({ products }) {
-  console.log(products);
+export default function Products({ products, searchValue, handleSearch }) {
   return (
     <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ mx: '80px', mb: '40px' }}>
+        <SearchInput
+          products={products}
+          searchValue={searchValue}
+          handleSearch={handleSearch}
+        />
+      </Box>
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}
@@ -24,9 +31,9 @@ export default function ResponsiveGrid({ products }) {
         align="center"
         // justify="center"
       >
-        {Array.from(Array(6)).map((_, index) => (
+        {Array.from(products).map((product, index) => (
           <Grid item xs={2} sm={4} md={4} key={index}>
-            <ProductCard />
+            <ProductCard id={product.id} product={product} />
           </Grid>
         ))}
       </Grid>

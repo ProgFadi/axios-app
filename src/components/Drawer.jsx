@@ -88,7 +88,12 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-function PersistentDrawerLeft({ products }) {
+function PersistentDrawerLeft({
+  products,
+  searchValue,
+  handleSearch,
+  loading,
+}) {
   const location = useLocation();
   const navigate = useNavigate();
   const theme = useTheme();
@@ -116,7 +121,19 @@ function PersistentDrawerLeft({ products }) {
       case '/login':
         return <Login />;
       case '/products':
-        return <Products products={products} />;
+        return (
+          <>
+            {loading ? (
+              <h1>Loading...</h1>
+            ) : (
+              <Products
+                products={products}
+                searchValue={searchValue}
+                handleSearch={handleSearch}
+              />
+            )}
+          </>
+        );
       case '/dashboard':
         return <Dashboard />;
       case '/categories':
