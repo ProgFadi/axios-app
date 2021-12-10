@@ -27,7 +27,9 @@ function Products({onAdd}) {
     if(!isLogged){
         return <Navigate to="/login"/>}
     return (
-       <ProductCard passedData={data} onAdd={onAdd}/>
+        <div>
+        <ProductCard passedData={data} onAdd={onAdd}/>
+        </div>
     );
 }
 

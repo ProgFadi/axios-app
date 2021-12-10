@@ -1,6 +1,8 @@
 import'./page.css'
+import Progress from './Progress'
+
 function ProductCard({onAdd, passedData}) {
-    if (!passedData.length) return <h2>Loading ...</h2>;
+    if (!passedData.length) return <Progress/>;
     return (
         <div>
               <div className={'pro'}>
@@ -22,6 +24,7 @@ function ProductCard({onAdd, passedData}) {
                     ))
                 }
             </div>
+
         </div>
     )
 }
