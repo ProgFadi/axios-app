@@ -5,8 +5,11 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 
-export default function ProductCard({ product }) {
-  console.log(product);
+export default function ProductCard({ product, handleAddToCart }) {
+  const handleClick = () => {
+    handleAddToCart(product);
+  };
+
   return (
     <Card sx={{ maxWidth: 250 }}>
       <CardActionArea>
@@ -37,8 +40,14 @@ export default function ProductCard({ product }) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" fullWidth variant="contained">
-          Remove
+        <Button
+          size="small"
+          color="primary"
+          fullWidth
+          variant="contained"
+          onClick={handleClick}
+        >
+          Add to Cart
         </Button>
       </CardActions>
     </Card>

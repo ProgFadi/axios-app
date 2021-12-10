@@ -13,7 +13,12 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function Products({ products, searchValue, handleSearch }) {
+export default function Products({
+  products,
+  searchValue,
+  handleSearch,
+  handleAddToCart,
+}) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Box sx={{ mx: '80px', mb: '40px' }}>
@@ -33,7 +38,11 @@ export default function Products({ products, searchValue, handleSearch }) {
       >
         {Array.from(products).map((product, index) => (
           <Grid item xs={2} sm={4} md={4} key={index}>
-            <ProductCard id={product.id} product={product} />
+            <ProductCard
+              id={product.id}
+              product={product}
+              handleAddToCart={handleAddToCart}
+            />
           </Grid>
         ))}
       </Grid>

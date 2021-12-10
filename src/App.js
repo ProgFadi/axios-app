@@ -13,6 +13,7 @@ function App(props) {
   const [products, setProducts] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [loading, setLoading] = useState(false);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     setLoading(true);
@@ -27,6 +28,16 @@ function App(props) {
       .then(setLoading(false));
   }, []);
 
+  useEffect(() => {
+    JSON.parse(localStorage.getItem('cart'));
+    console.log(cart);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+    console.log(cart);
+  }, [cart]);
+
   const handleSearch = (e) => {
     setSearchValue(e.target.value);
   };
@@ -34,6 +45,12 @@ function App(props) {
   const filteredProducts = products.filter((product) => {
     return product.title.toLowerCase().includes(searchValue.toLowerCase());
   });
+
+  // localStorage.clear();
+
+  const handleAddToCart = (product) => {
+    setCart((prevCart) => [...prevCart, product]);
+  };
 
   return (
     <Routes>
@@ -47,6 +64,7 @@ function App(props) {
             searchValue={searchValue}
             handleSearch={handleSearch}
             loading={loading}
+            handleAddToCart={handleAddToCart}
           />
         }
       />

@@ -93,6 +93,7 @@ function PersistentDrawerLeft({
   searchValue,
   handleSearch,
   loading,
+  handleAddToCart,
 }) {
   const location = useLocation();
   const navigate = useNavigate();
@@ -130,6 +131,7 @@ function PersistentDrawerLeft({
                 products={products}
                 searchValue={searchValue}
                 handleSearch={handleSearch}
+                handleAddToCart={handleAddToCart}
               />
             )}
           </>
