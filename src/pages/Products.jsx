@@ -9,16 +9,6 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 
-const addToCart = (product) => {
-    if (localStorage.getItem('cart') === null) {
-        localStorage.setItem('cart', JSON.stringify([product]))
-    } else {
-        const cart = JSON.parse(localStorage.getItem('cart'))
-        cart.push(product)
-        localStorage.setItem('cart', JSON.stringify(cart))
-    }
-}
-
 function Products(props) {
 
     const [products, setProducts] = useState([]);
