@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react';
+import Item from '../components/PrudactCard/item'
 
 function Products(props) {
     
     return (
         <div>
-            Products
+           <Item>
+           
+           </Item>
         </div>
     );
 }

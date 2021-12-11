@@ -87,7 +87,7 @@ function PersistentDrawerLeft(props) {
   const location = useLocation()
   const navigate = useNavigate()
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(!false);
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
