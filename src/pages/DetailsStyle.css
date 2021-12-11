@@ -1,19 +1,20 @@
-.testIt{
+.details-div{
     margin-top: 35px;
     padding-bottom: 15px;
     display: flex;
     justify-content: space-around;
     height: 25%;;
     width: 100%;
-    position: fixed;
+    /* border: solid; */
+    /* position: fixed; */
 }
-.testIt-2{
+
+.con-details-div{
     margin-top: 35px;
     padding-bottom: 15px;
-    display: flex;
-    justify-content: space-around;
     height: 25%;;
     width: 100%;
+    border: solid;
 }
 /* .bottom-div{
     margin-top: 30px;

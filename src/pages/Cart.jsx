@@ -6,7 +6,7 @@ import Product from '../components/productComps/product';
 import { CART_PRODUCTS } from '../utils/Constants';
 import "../components/productComps/mainStyle.css"
 import DetailsCart from "../components/DetailsCart"
-import "./testIt.css"
+import "./DetailsStyle.css"
 
 
 function CartPage(props) {
@@ -107,12 +107,11 @@ function CartPage(props) {
                 <MessageSow message="Removed From Cart Secesfully" />
             </div>
             <div className="flex-continer" >
-                <div className="testIt-2">
-                </div>
-                <div className="testIt">
+                {/* <div className="con-details-div">
+                </div> */}
+                <div className="details-div">
                     <DetailsCart len={productsArray.length} total={total} dis={dis} final={final} />
                 </div>
-
                 <div className='flex-products'>
                     {
                         filteredProducts.map((item)=>{
