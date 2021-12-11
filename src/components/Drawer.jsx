@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useEffect } from 'react'
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -31,6 +30,7 @@ import Tooltip from '@mui/material/Tooltip';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Cart from '../pages/cart/Cart';
 import Badge from '@mui/material/Badge';
+import  { useEffect, useState } from 'react';
 
 
 const drawerWidth = 240;
@@ -83,6 +83,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 function PersistentDrawerLeft(props) {
+  const [productCart,setProductCart] = useState(JSON.parse(localStorage.getItem('CartData')).length)
+  
   const location = useLocation()
   const navigate = useNavigate()
   const theme = useTheme();
@@ -104,7 +106,7 @@ function PersistentDrawerLeft(props) {
     handleCloseUserMenu()
   }
   useEffect(() => {
-
+    setProductCart(JSON.parse(localStorage.getItem('CartData')).length)
   }, [])
   const renderContent = (routeName) => {
     switch (routeName) {
@@ -163,7 +165,7 @@ function PersistentDrawerLeft(props) {
                 border: '1px solid gray',
                 borderRadius: '5px',
                 margin: '10px' }}>
-                  <Badge badgeContent={4} color="secondary">
+                  <Badge badgeContent={productCart} color="secondary">
                 <ShoppingCartIcon />
                 </Badge>
               </IconButton>
