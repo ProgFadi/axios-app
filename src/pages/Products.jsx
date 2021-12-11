@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import PageProduct from "../components/ProductPage/PageProduct";
+import axios from "../utils/axios";
 
-function Products(props) {
-    
+export default class Products extends React.Component {
+
+  render() {
     return (
-        <div>
-            Products
-        </div>
+      <div>
+        <PageProduct />
+      </div>
     );
+  }
 }
-
-export default Products;
