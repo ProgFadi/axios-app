@@ -2,32 +2,18 @@ import Box from '@mui/material/Box';
 import ProductImage from '../ProductPage/ProductImage'
 import ProductDetials from '../ProductPage/ProductDetials'
 import Button from '../ProductPage/Button'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Snackbar from '@mui/material/Snackbar';
 import { Alert } from '@mui/material';
 
 
 
-const ItemsCart = () => {
+const ItemsCart = ({onClick,productCart}) => {
     
-    const [productCart,setProductCart] = useState(JSON.parse(localStorage.getItem('CartData')))
     const [open, setOpen] = useState(false);
-    useEffect(() => {
-        setProductCart(productCart)
     
-      },[productCart])
-      
-
-   const onClick = (id) => {
-       
-
-       let filter = productCart.filter((product) => product.id !== id.id )
-       setProductCart(filter)
-      localStorage.setItem('CartData', JSON.stringify(filter) )
-      setOpen(true)
-    }
-    const handleClose = (event) => {
+    const handleClose = () => {
         setOpen(false);
     }
     return (

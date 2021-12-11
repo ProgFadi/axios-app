@@ -28,7 +28,7 @@ const Product = ({product, onDelete,name}) => {
             
         }
     }
-    const handleClose = (event) => {
+    const handleClose = () => {
         setOpen(false);
     }
     return (

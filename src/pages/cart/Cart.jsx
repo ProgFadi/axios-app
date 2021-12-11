@@ -6,6 +6,7 @@ import {Navigate} from 'react-router-dom'
 
 
 const Cart = () => {
+const [productCart,setProductCart] = useState(JSON.parse(localStorage.getItem('CartData')))
     const [isLogged, setIsLogged] = useState(true)
     useEffect(()=>{
         let token;
@@ -28,6 +29,20 @@ const Cart = () => {
     cart.map((item)=>(
         price+=item.price
     ))
+
+
+
+    const onClick = (id) => {
+        
+ 
+        let filter = productCart.filter((product) => product.id !== id.id )
+        setProductCart(filter)
+       localStorage.setItem('CartData', JSON.stringify(filter) )
+    //    setOpen(true)
+     }
+
+
+
     return (
         <Box sx={{
             display:'flex',
@@ -35,7 +50,7 @@ const Cart = () => {
             flexDirection: 'row',
             justifyContent: 'space-between',
         }}>
-        <ItemsCart />
+        <ItemsCart onClick={onClick} productCart={productCart} />
         <DetailsPaper length={length} price={price.toFixed(3)} />
         </Box>
     )
