@@ -2,29 +2,31 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Auth from '../utils/Auth';
-import { styled } from '@mui/material/styles';
+import Product from '../components/Product';
+import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import ButtonBase from '@mui/material/ButtonBase';
-import { Box } from '@mui/system';
+import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 
-const Img = styled('img')({
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '80%',
-    maxHeight: '80%',
-});
+const addToCart = (product) => {
+    if (localStorage.getItem('cart') === null) {
+        localStorage.setItem('cart', JSON.stringify([product]))
+    } else {
+        const cart = JSON.parse(localStorage.getItem('cart'))
+        cart.push(product)
+        localStorage.setItem('cart', JSON.stringify(cart))
+    }
+}
 
 function Products(props) {
 
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        axios.get('https://fakestoreapi.com/products?limit=5')
+        axios.get('https://fakestoreapi.com/products?limit=10')
 
             .then(res => {
-                console.log(res);
                 setProducts(res.data);
             })
             .catch(err => {
@@ -32,51 +34,47 @@ function Products(props) {
             });
     }, []);
 
+    let originalProducts = [...products];
+
+    const onSearch = (e) => {
+        let search = e.target.value;
+
+        if (search.length > 0) {
+
+            let filteredProducts = products.filter(product => {
+                return product.title.toLowerCase().includes(search.toLowerCase());
+            });
+
+            setProducts(filteredProducts);
+
+        } else {
+            setProducts(originalProducts);
+        }
+    }
 
     return (
-        <Box>
-            <Grid container spacing={2}>
+        <Grid container alignItems="stretch" style={{ display: 'flex', flexDirection: 'column' }} sx={{ alignItems: 'center' }}>
+            <Box component="form" sx={{ '& > :not(style)': { m: 1, maxWidth: '30rem', width: '20em' }, px: '2vw', pb: '2vh' }} noValidate autoComplete="off" >
+                <TextField id="product-search" label="Search Products" variant="outlined" onChange={onSearch} />
+            </Box>
+            <Grid item style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', p: 2, justifyContent: 'center' }}>
 
-                {products.map((product, i) => {
+
+                {(products.length > 0) ? products.map((product, index) => {
                     return (
-
-                        <Paper sx={{ p: 2, margin: 'auto', maxWidth: 300, flexGrow: 1 }} key={i}>
-                            <Grid sx={{ flexDirection: 'column' }} container spacing={2}>
-                                <Grid item>
-                                    <ButtonBase >
-                                        <Img alt={product.title} src={product.image} />
-                                    </ButtonBase>
-                                </Grid>
-                                <Grid item xs={12} sm container direction="column">
-                                    <Grid item xs container direction="row" spacing={2}>
-                                        <Grid item xs>
-                                            <Typography gutterBottom variant="subtitle1" component="div">
-                                                {product.title}
-                                            </Typography>
-                                            <Typography variant="body2" gutterBottom>
-                                                {product.category}
-                                            </Typography>
-
-                                        </Grid>
-                                        <Grid item>
-                                            <Typography variant="subtitle1" component="div">
-                                                {product.price} €
-                                            </Typography>
-                                        </Grid>
-                                    </Grid>
-                                    <Grid item>
-                                        <Typography sx={{ cursor: 'pointer', backgroundColor: 'black', color: 'white', padding: 1, borderRadius: 2, textAlign: 'center', mt: 2 }} variant="body2">
-                                            Add to Cart
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </Paper>
+                        <Product title={product.title} category={product.category} price={product.price} image={product.image} key={index} />
                     )
-                })}
-            </Grid>
-        </Box>
+                }) :
+                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', mt: '20vh' }}>
+                        <Typography sx={{ color: 'rgba(0, 0, 0, .7)' }} variant="h6">Loading Products ...</Typography>
+                        <Typography variant="body2"><HourglassBottomIcon sx={{ fontSize: '15rem', color: 'rgba(0, 0, 0, .1)' }} /></Typography>
+                    </Box>
+                }
 
+
+            </Grid>
+
+        </Grid>
     );
 }
 
