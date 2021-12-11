@@ -1,12 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import {Navigate} from 'react-router-dom'
 
-function Categories(props) {
-    console.log(props)
+
+function Categories() {
+    const [isLogged, setIsLogged] = useState(true)
     useEffect(()=>{
-        console.log('use effect')
-        let userData = JSON.parse(localStorage.getItem('myData'))
-        console.log(userData)
+        let token;
+        try {
+        token = localStorage.getItem('Token')
+        if(!token)
+         setIsLogged(false)
+
+        } catch (error) {
+            console.log(error)
+            setIsLogged(false)
+        }
+    
     },[])
+
+    if(!isLogged)
+        return <Navigate to="/login"/>
     return (
         <div>
             Categories
