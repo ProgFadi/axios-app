@@ -29,6 +29,10 @@ function Login(props) {
         showPassword: false,
     });
 
+    const handleChange = (prop) => (event) => {
+        setValues({ ...values, [prop]: event.target.value });
+    };
+
     const handleClickShowPassword = () => {
         setValues({
             ...values,
@@ -75,7 +79,7 @@ function Login(props) {
                             id="standard-adornment-password"
                             type={values.showPassword ? 'text' : 'password'}
                             value={values.password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            onChange={handleChange('password')}
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
