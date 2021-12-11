@@ -19,23 +19,24 @@ import {BrowserRouter as Router, Routes, Route, Link as ReactLink} from 'react-r
 import Dashboard from './Dashboard'
 import Categories from './Categories'
 import Products from './Products'
-import { icons } from 'react-icons/lib';
+import Cart from './Cart';
 
 const title = 'Matryoshka'
 const link_items = [
     { name: 'Dashboard',    icon: FiHome,       to: '/dashboard',   comp: <Dashboard/>},
     { name: 'Categories',   icon: FiCompass,    to: '/categories',  comp: <Categories/>},
     { name: 'Products',     icon: FiTrendingUp, to: '/products',    comp: <Products/>},
+    { name: 'Cart',         icon: FiShoppingCart,to: '/cart',       comp: <Cart/>},
 ]
 
 export default function App() {
     return (
         <ChakraProvider>
             <Router>
-                <Flex justifyContent="end" color="white"
+                {/* <Flex justifyContent="end" color="white"
                 as="header" position="fixed" width="100%" backgroundColor="black" height="2.4rem">
                 <Icon mr="4" mt="2" fontSize="20" as={FiShoppingCart}></Icon>
-                </Flex>
+                </Flex> */}
                 <Box display='flex'>
                     {/* Side Panel */}
                     <Box bg='black' color='white' w={60} h='100vh'>
