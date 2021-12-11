@@ -73,18 +73,17 @@ function ProductCard({ is_new, image_url, name, price }) {
           </Box>
           <Flex mt="1" justifyContent="space-between" alignContent="center">
             <Box
-              fontSize="2xl"
+              fontSize="l"
               fontWeight="semibold"
               as="h4"
               lineHeight="tight"
-              isTruncated
-              fontSize={'1em'}>
+              isTruncated>
               {name}
             </Box>
           </Flex>
 
           <Flex justifyContent="space-between" alignContent="center">
-            <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
+            <Box fontSize="xl" color={useColorModeValue('gray.800', 'white')}>
               <Box as="span" color={'gray.600'} fontSize="lg">
                 £
               </Box>

@@ -35,9 +35,11 @@ export default class Products extends Component {
             return <h1> still loading </h1>
         } else {
             return (
-                prods.map((p, i) => (
-                    <Card name={p.title} price={p.price} rating={4} num_reviews={101} image_url={p.image}/>
-                ))
+                <div style={{display:"flex"}}>
+                {prods.map((p, i) => (
+                    <Card key={i} name={p.title} price={p.price} rating={4} num_reviews={101} image_url={p.image}/>
+                ))}
+                </div> 
             )
         }
 

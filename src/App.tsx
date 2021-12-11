@@ -11,6 +11,7 @@ import {
     FiHome,
     FiTrendingUp,
     FiCompass,
+    FiShoppingCart,
 } from 'react-icons/fi';
 
 import {BrowserRouter as Router, Routes, Route, Link as ReactLink} from 'react-router-dom'
@@ -18,6 +19,7 @@ import {BrowserRouter as Router, Routes, Route, Link as ReactLink} from 'react-r
 import Dashboard from './Dashboard'
 import Categories from './Categories'
 import Products from './Products'
+import { icons } from 'react-icons/lib';
 
 const title = 'Matryoshka'
 const link_items = [
@@ -30,6 +32,10 @@ export default function App() {
     return (
         <ChakraProvider>
             <Router>
+                <Flex justifyContent="end" color="white"
+                as="header" position="fixed" width="100%" backgroundColor="black" height="2.4rem">
+                <Icon mr="4" mt="2" fontSize="20" as={FiShoppingCart}></Icon>
+                </Flex>
                 <Box display='flex'>
                     {/* Side Panel */}
                     <Box bg='black' color='white' w={60} h='100vh'>
@@ -56,7 +62,7 @@ export default function App() {
                     </Box>
 
                     {/* Main Content */}
-                    <Box mx='1vw' my='1vh'>
+                    <Box width="80rem" mx='1vw' my='1vh'>
                         <Routes>
                             {link_items.map((l, i) => <Route path={l.to} element={l.comp} key={i}/>)}
                         </Routes>
