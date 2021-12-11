@@ -1,32 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import {Navigate} from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
+import Auth from '../utils/Auth';
+
 function Dashboard(props) {
-    const [isLogged, setIsLogged] = React.useState(true)
-    useEffect(()=>{
-        console.log('1')
-        let token;
-        try {
-        token = JSON.parse(localStorage.getItem('token'))
-        console.log('2')
-        if(!token)
-         setIsLogged(false)
-
-        } catch (error) {
-            console.log(error)
-            setIsLogged(false)
-        }
-    
-    },[])
-    console.log('3')
-
-    if(!isLogged)
-        return <Navigate to="/login"/>
 
     return (
         <div>
-            Dashboard
+            <h1>Dashboard</h1>
         </div>
     );
 }
+
+Dashboard = Auth(Dashboard)
 
 export default Dashboard;

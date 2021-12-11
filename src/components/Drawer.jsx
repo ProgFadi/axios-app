@@ -16,27 +16,24 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import { Routes, Link, Route, useLocation, useNavigate } from 'react-router-dom'
 import Dashboard from '../pages/Dashboard'
 import Categories from '../pages/Categories'
 import Products from '../pages/Products'
-import LogoutIcon from '@mui/icons-material/Logout';
-import GridViewIcon from '@mui/icons-material/GridView';
-import CategoryIcon from '@mui/icons-material/Category';
-import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import Login from '../pages/Login'
+import LogoutIcon from '@mui/icons-material/Logout';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import CategoryIcon from '@mui/icons-material/Category';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import HomeIcon from '@mui/icons-material/Home';
 import Avatar from './Avatar'
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Tooltip from '@mui/material/Tooltip';
-import {navigate} from 'react-router-dom'
-import {TOKEN_KEY} from '../utils/Constants'
+import { navigate } from 'react-router-dom'
+import { TOKEN_KEY } from '../utils/Constants'
 
 const drawerWidth = 240;
-
-
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -148,7 +145,7 @@ function PersistentDrawerLeft(props) {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap component="div">
-
+              E-Commerce
             </Typography>
             <Tooltip title="Logout">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -200,28 +197,20 @@ function PersistentDrawerLeft(props) {
         </DrawerHeader>
         <Divider />
         <List>
-          <ListItem component={Link} to="/dashboard" key='dashboard'>
-            <ListItemIcon>
-              <GridViewIcon />
-            </ListItemIcon>
-            <ListItemText primary='Dashboard' />
-          </ListItem>
-          <ListItem component={Link} to="/categories" key='categories'>
-            <ListItemIcon>
-              <CategoryIcon />
-            </ListItemIcon>
-            <ListItemText primary='Categories' />
-          </ListItem>
-          <ListItem component={Link} to="/products" key='products'>
-            <ListItemIcon>
-              <ProductionQuantityLimitsIcon />
-            </ListItemIcon>
-            <ListItemText primary='Products' />
-          </ListItem>
+
+          {['Dashboard', 'Categories', 'Products'].map((text, index) => (
+            <ListItem button key={text} component={Link} to={`/${text.toLowerCase()}`}>
+              <ListItemIcon>
+                {text === 'Dashboard' ? <DashboardIcon /> : text === 'Categories' ? <CategoryIcon /> : <ShoppingBagIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+
         </List>
         <Divider />
         <List>
-          <ListItem component={Link} to="/login" key='logout'>
+          <ListItem button component={Link} to="/login" key='logout'>
             <ListItemIcon>
               <LogoutIcon />
             </ListItemIcon>
