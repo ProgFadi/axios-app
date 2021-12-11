@@ -29,10 +29,6 @@ function Login(props) {
         showPassword: false,
     });
 
-    const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-    };
-
     const handleClickShowPassword = () => {
         setValues({
             ...values,
@@ -53,8 +49,6 @@ function Login(props) {
             }
         )
             .then((response) => {
-                console.log(response)
-                let token = response.data.token.access_token;
                 let data = response.data;
                 localStorage.setItem(TOKEN_KEY, JSON.stringify(data))
                 navigate('/dashboard')
@@ -82,7 +76,6 @@ function Login(props) {
                             type={values.showPassword ? 'text' : 'password'}
                             value={values.password}
                             onChange={(e) => setPassword(e.target.value)}
-                            onChange={handleChange('password')}
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton

@@ -1,6 +1,11 @@
 import * as React from 'react';
-import { useEffect } from 'react'
-import { styled, useTheme } from '@mui/material/styles';
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { TOKEN_KEY } from '../utils/Constants'
+import Dashboard from '../pages/Dashboard'
+import Categories from '../pages/Categories'
+import Products from '../pages/Products'
+import Login from '../pages/Login'
+import Cart from '../pages/Cart';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,22 +21,16 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { Routes, Link, Route, useLocation, useNavigate } from 'react-router-dom'
-import Dashboard from '../pages/Dashboard'
-import Categories from '../pages/Categories'
-import Products from '../pages/Products'
-import Login from '../pages/Login'
 import LogoutIcon from '@mui/icons-material/Logout';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import CategoryIcon from '@mui/icons-material/Category';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-import HomeIcon from '@mui/icons-material/Home';
 import Avatar from './Avatar'
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Tooltip from '@mui/material/Tooltip';
-import { navigate } from 'react-router-dom'
-import { TOKEN_KEY } from '../utils/Constants'
+import LocalMallIcon from '@mui/icons-material/LocalMall';
+import { styled, useTheme } from '@mui/material/styles';
 
 const drawerWidth = 240;
 
@@ -101,20 +100,22 @@ function PersistentDrawerLeft(props) {
     navigate('/login')
     handleCloseUserMenu()
   }
-  useEffect(() => {
 
-  }, [])
   const renderContent = (routeName) => {
     console.log(routeName)
     switch (routeName) {
       case '/login':
         return <Login />
+      case '/cart':
+        return <Cart />
       case '/products':
         return <Products />
       case '/dashboard':
         return <Dashboard />
       case '/categories':
         return <Categories />
+      default:
+        return <Login />
     }
   }
   const handleOpenUserMenu = (event) => {
@@ -132,7 +133,8 @@ function PersistentDrawerLeft(props) {
             flexGrow: 1,
             display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'space-between'
+            justifyContent: 'flex-start',
+            alignItems: 'center'
           }}>
 
             <IconButton
@@ -147,11 +149,28 @@ function PersistentDrawerLeft(props) {
             <Typography variant="h6" noWrap component="div">
               E-Commerce
             </Typography>
+          </Box>
+          <Box sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'flex-end'
+          }}>
+            <IconButton
+              color="inherit"
+              aria-label="cast"
+              onClick={() => { navigate('/cart') }}
+              edge="end"
+              sx={{ mr: 2 }}
+            >
+              <LocalMallIcon />
+            </IconButton>
             <Tooltip title="Logout">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
+
 
             <Menu
               sx={{ mt: '45px' }}
