@@ -12,13 +12,7 @@ import Drawer from './components/Drawer'
 function App(props) {
 
 
-  return  <Routes>
-   <Route path="/dashboard" element={<Drawer/>}/>
-   <Route path="/categories" element={<Drawer   {...props}/>}/>
-   <Route path="/products" element={<Drawer/>}/>
-   <Route path="/login" element={<Login/>}/>
-
-</Routes>
+  return  <Drawer/>
 }
 
 export default App;

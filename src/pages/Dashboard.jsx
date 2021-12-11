@@ -14,6 +14,7 @@ function Dashboard(props) {
         } catch (error) {
             console.log(error)
             setIsLogged(false)
+            Navigate('/login')
         }
     
     },[])

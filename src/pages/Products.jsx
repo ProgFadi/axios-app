@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
+import ProductsPage from './../components/ProductsPage'
 
 function Products(props) {
     
     return (
-        <div>
-            Products
-        </div>
+      <ProductsPage />
     );
 }
 

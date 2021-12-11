@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../utils/axios'
-import {TOKEN_KEY} from '../utils/Constants'
+import {TOKEN_KEY, LOGIN_URL} from '../utils/Constants'
 function Login(props) {
     const navigate = useNavigate()
     const [email, setEmail] = React.useState('')
@@ -9,7 +9,7 @@ function Login(props) {
 
     const login = (e)=>{
         e.preventDefault()
-        axios.post('/api/academy/auth/login',
+        axios.post(`${LOGIN_URL}/api/academy/auth/login`,
         {
             email:email,
             password:password
