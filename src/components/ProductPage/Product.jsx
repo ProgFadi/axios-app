@@ -12,7 +12,7 @@ class Product extends Component {
         <div className="details">
           <div className="background-white">
             <p className="grey-text">{this.props.product.title}</p>
-            <p>{this.props.product.description}</p>
+            <p>{this.props.product.category}</p>
           </div>
           <div className="background-white">
             <p className="grey-text">{this.props.product.price}</p>

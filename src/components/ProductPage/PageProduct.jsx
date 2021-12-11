@@ -21,9 +21,9 @@ class PageProduct extends React.Component {
     const tempProducts = this.state.products;
     //console.log(tempProducts);
     tempProducts.push({
-      name: "++ Sneakers",
+      title: "++ Sneakers",
       description: "Air Max 95 U",
-      prics: "$ 99",
+      price: "$ 99",
     });
     this.setState({
       products: tempProducts,
@@ -35,7 +35,7 @@ class PageProduct extends React.Component {
 
     if (keyword !== "") {
       const results = this.state.products.filter((product) => {
-        return product.name.toLowerCase().startsWith(keyword.toLowerCase());
+        return product.title.toLowerCase().startsWith(keyword.toLowerCase());
       });
       this.setState({
         searchResult: results,
