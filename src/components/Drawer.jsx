@@ -30,6 +30,8 @@ import Menu from '@mui/material/Menu';
 import Tooltip from '@mui/material/Tooltip';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Cart from '../pages/cart/Cart';
+import Badge from '@mui/material/Badge';
+
 
 const drawerWidth = 240;
 
@@ -161,7 +163,9 @@ function PersistentDrawerLeft(props) {
                 border: '1px solid gray',
                 borderRadius: '5px',
                 margin: '10px' }}>
+                  <Badge badgeContent={4} color="secondary">
                 <ShoppingCartIcon />
+                </Badge>
               </IconButton>
             </Tooltip>
 

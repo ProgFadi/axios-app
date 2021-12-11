@@ -4,13 +4,15 @@ import ProductDetials from '../ProductPage/ProductDetials'
 import Button from '../ProductPage/Button'
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Snackbar from '@mui/material/Snackbar';
+import { Alert } from '@mui/material';
 
 
 
 const ItemsCart = () => {
     
     const [productCart,setProductCart] = useState(JSON.parse(localStorage.getItem('CartData')))
-
+    const [open, setOpen] = useState(false);
     useEffect(() => {
         setProductCart(productCart)
     
@@ -23,10 +25,15 @@ const ItemsCart = () => {
        let filter = productCart.filter((product) => product.id !== id.id )
        setProductCart(filter)
       localStorage.setItem('CartData', JSON.stringify(filter) )
+      setOpen(true)
+    }
+    const handleClose = (event) => {
+        setOpen(false);
     }
     return (
         <Box sx={{
             width:'75%',
+            marginRight: '50px',
             
         }}>
               <div className={'productsDiv'} style={{border: '1px solid gray',
@@ -42,12 +49,17 @@ const ItemsCart = () => {
             <ProductDetials product={product} />
             <div>
                 <Button name={'Remove item from Cart'} styles='btnAddCart'  onClick={() => onClick(product)} />
+                <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error"  sx={{ width: '100%' }}>
+                    Product removed
+                </Alert>
+            </Snackbar>
+
             </div>
         </div>
 
                  )
                  ): <Link to='/product'>Your Cart is empty Go to Shop</Link>  }
-
                  </div>
                  </Box>
         
