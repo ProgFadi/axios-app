@@ -78,89 +78,44 @@ color: white;
   justify-content: center;
   text-align-last:center;
 `;
-//products
-// function Products(){
-//     const  [ searchVal,setSearchVal]=useState('');
-//     const [filteredPoints, setfilteredPoints] = useState([]);
-//     const [searchInput, setSearchInput] = useState('');
-//             const [products,setProducts]=useState([
-//                     {
-//                     }
-//                 ])
-//     // const [products,setProducts]=React.useState([])
-//     axios.get('https://fakestoreapi.com/products?limit=3&sort=desc')
-//         .then((response) => {
-//
-//             const products=response.data;
-//             setProducts(products)
-//         })
-//
-//     {/*const searchItems = (searchValue) => {*/}
-//     {/*    setSearchInput(searchValue)*/}
-//     {/*    if (searchInput !== '') {*/}
-//     //         const filteredData = products.filter((item) => {
-//     //             return Object.values(item).join('').includes(searchInput)
-//     //         })
-//     //         setFilteredResults(filteredData)
-//     //     }
-//     //     else{
-//     //         setFilteredResults(products)
-//     //     }
-//     // }
-//
-//
-//    function search_product(e) {
-//         let newValue = e.target.value;
-//         let tempPoints = products;
-//         // search
-//         if(!newValue)
-//         {
-//             setSearchVal(newValue);
-//             setfilteredPoints(products);
-//             return
-//         }
-//         let filtered = tempPoints.filter((item)=>{
-//             return item.title == newValue
-//         });
-//        setSearchVal(newValue);
-//        setfilteredPoints(products);
-//     }
-//         return
-//     }
-// export default Products;
 
 
-function Products({addcart}) {
+function Products() {
 
     const [products, setProducts] = useState([]);
-    //   searchVal:"",
-    const [searchVal, setSearchVal] = useState([]);
-    const [filteredPoints, setFilteredPoints] = useState([])
-    axios.get('https://fakestoreapi.com/products?limit=3&sort=desc')
-        .then((response) => {
 
+    const [search, setSearch] = useState(products);
+
+    axios.get('https://fakestoreapi.com/products')
+        .then((response) => {
             const products = response.data;
             localStorage.setItem(Product, JSON.stringify(products))
             setProducts(products)
-
         });
+         const searched=(e)=>{
+               let filter = products.filter((item)=>{
+                   return item.title.toLowerCase().includes(e.target.value.toLowerCase())
+               })
+             setSearch(filter)
+    }
 
-//     search_product(e)
-//     {
-//         let newValue = e.target.value;
-//         let tempPoints = setProducts(products);
-//         // search
-//         if (!newValue) {
-//             setSearchVal(newValue);
-//             setFilteredPoints(products);
-//         }
-//         return
-//     let filtered = tempPoints.filter((item) => {
-//         return item.title == newValue
-//     });
-//     setSearchVal(newValue);
-//     setFilteredPoints(products);
-// }
+    const addToCard=(item)=>{
+        console.log(item);
+        let getData=JSON.parse(localStorage.getItem('CartsData'))
+        if(!getData){
+            let addCart=[item]
+            localStorage.setItem('CartsData',JSON.stringify(addCart))
+        }else {
+            let obj =getData.find(o => o.title === item.title);
+             if(!obj){
+                 getData.push(item)
+                 localStorage.setItem('CartsData',JSON.stringify(getData))
+             }
+             else {
+                 alert('item add ')
+             }
+        }
+    };
         return (
             <div>
                 <Bodw>
@@ -169,15 +124,16 @@ function Products({addcart}) {
                             <Wrapper>
                                 <Left>
                                     <input
-                                        // onChange={()=>search_product}
-                                             value={searchVal} type="text"
+                                        onChange={searched}
+                                             // value={search} type="text"
                                              placeholder={'Search Product'} />
                                 </Left>
                             </Wrapper>
                         </Container>
+
                         <Bod>
                             {
-                                products.map((item,index)=>
+                                search.map((item,index)=>
                                     <Card>
                                         <img width={270} height={200}
                                              src={item.image}/>
@@ -187,7 +143,7 @@ function Products({addcart}) {
                                             <Text>{item.category}</Text>
                                         </RowText>
                                         <BottonB>
-                                            <Button  onClick={() => addcart(item)}>
+                                            <Button  onClick={()=>addToCard(item)}>
                                                 <p style={{color:'#FFF'}}>add new</p></Button>
                                         </BottonB>
                                     </Card>

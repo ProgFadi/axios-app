@@ -15,7 +15,7 @@ function App(props) {
    <Route path="/categories" element={<Drawer   {...props}/>}/>
    <Route path="/products" element={<Drawer/>}/>
    <Route path="/login" element={<Login/>}/>
-   <Route path="/cards" element={<Cards/>}/>
+   <Route path="/carts" element={<Cards/>}/>
 
 </Routes>
 }

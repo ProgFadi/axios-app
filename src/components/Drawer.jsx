@@ -31,7 +31,8 @@ import Menu from '@mui/material/Menu';
 import Tooltip from '@mui/material/Tooltip';
 import {navigate} from 'react-router-dom'
 import {TOKEN_KEY} from '../utils/Constants'
-
+import Icon from '@mui/material/Icon';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 const drawerWidth = 240;
 
 
@@ -148,8 +149,9 @@ function PersistentDrawerLeft(props) {
             <Typography variant="h6" noWrap component="div">
             </Typography>
             <Tooltip>
-              <IconButton style={{color:'green'}}  component={Link}
-                          to="/cart">Icons cart</IconButton>
+              <IconButton style={{color:'green',paddingLeft:'1000px'}}  component={Link}
+                          to="/carts"> <AddShoppingCartIcon></AddShoppingCartIcon>
+              </IconButton>
             </Tooltip>
 
             <Tooltip title="Logout">
@@ -172,8 +174,7 @@ function PersistentDrawerLeft(props) {
                 horizontal: 'right',
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
+              onClose={handleCloseUserMenu}>
               <MenuItem key='Logout' onClick={logout}>
                 <Typography textAlign="center">Logout</Typography>
               </MenuItem>
