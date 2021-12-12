@@ -6,6 +6,7 @@ import {Button} from "@mui/material";
 const Body=styled.div`
 display: flex;
 flex-display: row;
+  //align-items: start;
   justify-content: space-between;
 `;
 const buttons = styled.div`
@@ -20,12 +21,13 @@ const Bod=styled.div`
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-between;
+  width: 900px;
   //padding-bottom: 10px;
 `;
 const Carde =styled.div`
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     //padding-bottom: 0px;
-    background-color: white;
+    background-color: #E6E6E6;
     width: 270px;
     border-radius: 10px;
   
@@ -36,6 +38,7 @@ display: flex;
 flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  padding-bottom: 10px;
 
 `;
 const Text=styled.div`
@@ -43,8 +46,9 @@ padding-left: 10px;
 `;
 const BottonB=styled.div`
 background-color: black;
-  
+  height: 60px;
 `;
+
 const Ht6=styled.h6`
 color: white;
   justify-content: center;
@@ -52,7 +56,13 @@ color: white;
 `;
 function Cards(){
     const [cart,setCart]=useState(JSON.parse(localStorage.getItem('CartsData')))
-    const [price,setPrice]=useState(0)
+    var price = 0
+    if(cart){
+        cart.map((item)=>(
+            price+=item.price
+        ))
+    }
+
      const remove=(removeCart)=>{
         let temp =cart.filter((product)=>product.id != removeCart.id)
          setCart(temp)
@@ -67,30 +77,53 @@ function Cards(){
                 {
 
                     cart.map((item,index)=>
-                        <Carde>
-                            <img width={270} height={200}
-                                 src={item.image}/>
-                            <h6>{item.title}</h6>
-                            <RowText>
-                                <h6>{item.price}</h6>
-                                <Text>{item.category}</Text>
-                            </RowText>
-                            <box styles={{padding:'80px'}}>
-                                <BottonB>
-                                    <Button >
-                                        <p style={{color:'#FFF',paddingLeft:'90px'}} onClick={()=>remove(item)}>remove</p></Button>
-                                </BottonB>
+                     <div style={{padding:'30px'}}>
+                         <Carde>
+                         <img width={270} height={200}
+                              src={item.image}/>
 
-                            </box>
-                        </Carde>
+                         <RowText>
+                             <h4>{item.category}</h4>
+                             <div style={{
+                                 height:'30px',
+                                 color:'red',
+                                 background:'#FFF',
+                                 borderRadius: '15px'
+                             }}>${item.price}</div>
+
+                         </RowText>
+                         <box styles={{padding:'80px'}}>
+                             <BottonB>
+                                 <Button >
+                                     <p style={{color:'#FFF',paddingLeft:'90px'}} onClick={()=>remove(item)}>remove</p></Button>
+                             </BottonB>
+
+                         </box>
+                     </Carde>
+                     </div>
                     )
                 }
             </Bod>
-            <box style={{color:'green'}}>
-                <p>itemsCount {cart.length}</p>
-
-
-            </box>
+            <div style={{ backgroundColor: '#E6E6E6',
+                width: '315px',
+                // paddingRight:' 20px',
+                paddingTop:'30px',
+                margin:'30px',
+                borderRadius: '10px',}}>
+                <div style={{paddingLeft:'30px'}}>
+                    <h4>Details</h4>
+                    <p>items Number: {cart.length}</p>
+                    <p>Total Amount  ${price}</p>
+                    <p>Discount: 99$</p>
+            </div>
+                <div style={{paddingLeft:'100px',
+                paddingTop:'120px'}}>
+                    <h4>Final Amount:</h4>
+                    <h3 style={{color:'green'}}>900 $</h3>
+                </div>
+                <div style={{paddingLeft:'90px',paddingTop:'160px'}}>                <buttons style={{background:'green',color:'#FFF',paddingLeft:'30px',paddingRight:'30px',paddingTop:'10px',paddingBottom:'10px'}}>checkout</buttons>
+                </div>
+            </div>
 
         </Body>
     );
