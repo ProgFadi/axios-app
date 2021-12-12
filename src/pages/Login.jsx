@@ -4,7 +4,6 @@ import axios from '../utils/axios'
 import {TOKEN_KEY} from '../utils/Constants'
 import AuthContext from '../contexts/AuthContext'
 function Login(props) {
-    const navigate = useNavigate()
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
     const {login} = useContext(AuthContext)

@@ -106,7 +106,6 @@ function PersistentDrawerLeft(props) {
     setOpen(false);
   };
 
-
   useEffect(() => {
 
   }, [])
