@@ -31,6 +31,9 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Cart from '../pages/cart/Cart';
 import Badge from '@mui/material/Badge';
 import  { useEffect } from 'react';
+import useLogout from '../hooks/useLogout'
+import useAuth from '../hooks/useAuth';
+
 
 
 const drawerWidth = 240;
@@ -88,6 +91,13 @@ function PersistentDrawerLeft(props) {
   const navigate = useNavigate()
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const {logout} = useLogout()
+  const auth = useAuth().isAuth
+
+    useEffect(() => {
+        if(!auth) navigate('/login')
+    }, )
+
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 var length = 0
@@ -102,11 +112,7 @@ var length = 0
     setOpen(false);
   };
 
-  const logout = () => {
-    localStorage.removeItem('Token')
-    navigate('/login')
-    handleCloseUserMenu()
-  }
+  
   useEffect(() => {
   }, [])
   const renderContent = (routeName) => {
@@ -197,7 +203,7 @@ var length = 0
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem key='Logout' onClick={logout}>
+              <MenuItem key='Logout' onClick={()=> logout()}>
                 <Typography textAlign="center">Logout</Typography>
               </MenuItem>
             </Menu>

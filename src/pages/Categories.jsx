@@ -1,25 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import {Navigate} from 'react-router-dom'
+import useAuth from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 
 function Categories() {
-    const [isLogged, setIsLogged] = useState(true)
-    useEffect(()=>{
-        let token;
-        try {
-        token = localStorage.getItem('Token')
-        if(!token)
-         setIsLogged(false)
+    const navigate = useNavigate()
+    const auth = useAuth().isAuth
 
-        } catch (error) {
-            console.log(error)
-            setIsLogged(false)
-        }
+    useEffect(() => {
+        if(!auth) navigate('/login')
+        console.log('effect')
+    }, )
+
     
-    },[])
-
-    if(!isLogged)
-        return <Navigate to="/login"/>
     return (
         <div>
             Categories

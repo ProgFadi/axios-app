@@ -2,34 +2,26 @@ import Header from './Header';
 import './styles.css'
 import { useEffect, useState } from 'react';
 import Products from './Products';
-import {Navigate} from 'react-router-dom'
+import useAuth from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom'
 
 
 function Product() {
-  const [isLogged, setIsLogged] = useState(true)
   const [products,setProducts] = useState(JSON.parse(localStorage.getItem('data')))
   const [itemFound,setItemFound] = useState(products)
-  
-  useEffect(()=>{
-      let token;
-      try {
-      token = localStorage.getItem('Token')
-      if(!token)
-       setIsLogged(false)
+  const navigate = useNavigate()
+    const auth = useAuth().isAuth
 
-      } catch (error) {
-          console.log(error)
-          setIsLogged(false)
-      }
-  
-  },[])
+    useEffect(() => {
+        if(!auth) navigate('/login')
+    }, )
+
 
   useEffect(() => {
     setItemFound(products)
 
   },[products])
-  if(!isLogged)
-      return <Navigate to="/login"/>
+
 
     const deleteProduct = (id) => {
       setProducts(products.filter((product) => product.id !== id ))

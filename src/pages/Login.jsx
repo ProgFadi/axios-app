@@ -1,7 +1,5 @@
-import { useNavigate } from 'react-router-dom';
-// import axios from '../utils/axios'
 import * as React from 'react'
-import {useState} from 'react'
+import {useState , useContext } from 'react'
 import './Login.css'
 import Box from '@mui/material/Box'
 import Container from '@mui/material/Container'
@@ -9,14 +7,12 @@ import axios from 'axios'
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import AuthContext from '../contexts/AuthContext'
 
 function Login(props) {
-    const navigate = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
-    const login = (e)=>{
-        e.preventDefault()
+    const {login} = useContext(AuthContext)
 
         axios({
             method: 'get',
@@ -30,25 +26,6 @@ function Login(props) {
             console.log(err)
           })
 
-        if (!email || !password) return alert('Please enter Email and Password')
-        else{
-            axios({
-                method: 'post',
-                url: 'https://fakestoreapi.com/auth/login',
-                data: {
-                    username: email,
-                    password: password
-                }
-              })
-        .then((response)=>{
-            let token = response.data.token;
-            localStorage.setItem('Token', token)
-            navigate('/dashboard')
-        })
-        .catch((err)=>{
-            console.log(err)
-        })}
-    }
     return (
         <Box sx={{
             boxSizing: 'border-box',
@@ -65,10 +42,22 @@ function Login(props) {
                     <p>Sign in on the internal platform</p>
                 </Box>
                 <Box>
-                <form className='formStyle' onSubmit={login}>
+                <form 
+                className='formStyle' 
+                onSubmit={(e)=> {
+                    e.preventDefault()
+                    login(email,password)
+                    }}>
+
                     <TextField  label="Email" variant="outlined" value={email} onChange={(e)=>setEmail(e.target.value)} type="email" />
                     <TextField  label="Password" variant="outlined" value={password} onChange={(e)=>setPassword(e.target.value)} type="password" />
-                    <Button variant="contained" type="submit" onClick={login}>Login</Button>
+                    <Button 
+                    variant="contained"
+                     type="submit"
+                     onClick={(e)=> {
+                     e.preventDefault()
+                     login(email,password)
+                     }}>Login</Button>
                  </form>
                 </Box>
                </Paper>

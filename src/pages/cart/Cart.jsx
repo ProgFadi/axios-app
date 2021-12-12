@@ -2,27 +2,21 @@ import Box from '@mui/material/Box';
 import DetailsPaper from './DetailsPaper'
 import ItemsCart from './ItemsCart'
 import React, { useEffect, useState } from 'react';
-import {Navigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import useAuth from '../../hooks/useAuth';
+
 
 
 const Cart = () => {
 const [productCart,setProductCart] = useState(JSON.parse(localStorage.getItem('CartData')))
-    const [isLogged, setIsLogged] = useState(true)
-    useEffect(()=>{
-        let token;
-        try {
-        token = localStorage.getItem('Token')
-        if(!token)
-         setIsLogged(false)
+const navigate = useNavigate()
+    const auth = useAuth().isAuth
 
-        } catch (error) {
-            setIsLogged(false)
-        }
-    
-    },[])
+    useEffect(() => {
+        if(!auth) navigate('/login')
+    }, )
 
-    if(!isLogged)
-        return <Navigate to="/login"/>
+   
     let cart = JSON.parse(localStorage.getItem('CartData'))
     var price = 0
     if(cart){
