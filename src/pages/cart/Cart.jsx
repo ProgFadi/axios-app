@@ -24,11 +24,19 @@ const [productCart,setProductCart] = useState(JSON.parse(localStorage.getItem('C
     if(!isLogged)
         return <Navigate to="/login"/>
     let cart = JSON.parse(localStorage.getItem('CartData'))
-    let length = cart.length
-    let price = 0
-    cart.map((item)=>(
-        price+=item.price
-    ))
+    var price = 0
+    if(cart){
+        var length = cart.length
+        cart.map((item)=>(
+         price+=item.price
+        ))
+    }
+    else {
+         length = 0
+    }
+    
+    
+    
 
 
 

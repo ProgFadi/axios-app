@@ -26,7 +26,7 @@ const ItemsCart = ({onClick,productCart}) => {
             borderRadius: '10px',
             backgroundColor: '#f8f8f8',}}>
                 
-             {productCart.length ? productCart.map((product, index)=>(
+             {productCart ? productCart.map((product, index)=>(
                  
                  <div className={'product'} key={index}>
          <div> 
