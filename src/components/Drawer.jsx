@@ -33,7 +33,9 @@ import Menu from '@mui/material/Menu';
 import Tooltip from '@mui/material/Tooltip';
 import {navigate} from 'react-router-dom'
 import {TOKEN_KEY} from '../utils/Constants'
+import AuthContext from '../contexts/AuthContext' 
 
+import useLogout from '../hooks/useLogout'
 const drawerWidth = 240;
 
 
@@ -88,9 +90,14 @@ function PersistentDrawerLeft(props) {
   const navigate = useNavigate()
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-
+  const ctx = React.useContext(AuthContext);
+  const {logout} = useLogout()
+  console.log('ctx in drawer :',ctx)
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  if(!ctx.isAuth)
+  {
+    navigate('/login');
+  }
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -99,11 +106,7 @@ function PersistentDrawerLeft(props) {
     setOpen(false);
   };
 
-  const logout = () => {
-    localStorage.removeItem(TOKEN_KEY)
-    navigate('/login')
-    handleCloseUserMenu()
-  }
+
   useEffect(() => {
 
   }, [])
@@ -172,7 +175,7 @@ function PersistentDrawerLeft(props) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem key='Logout' onClick={logout}>
+              <MenuItem key='Logout' onClick={()=> logout()}>
                 <Typography textAlign="center">Logout</Typography>
               </MenuItem>
             </Menu>
