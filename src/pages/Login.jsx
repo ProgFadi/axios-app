@@ -17,6 +17,19 @@ function Login(props) {
 
     const login = (e)=>{
         e.preventDefault()
+
+        axios({
+            method: 'get',
+            url: 'https://fakestoreapi.com/products',
+          })
+          .then((response)=>{
+            let data = response.data;
+            localStorage.setItem('data', JSON.stringify(data))
+          })
+          .catch((err)=>{
+            console.log(err)
+          })
+
         if (!email || !password) return alert('Please enter Email and Password')
         else{
             axios({

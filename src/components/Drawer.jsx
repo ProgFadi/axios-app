@@ -83,7 +83,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 function PersistentDrawerLeft(props) {
-  const [productCart,setProductCart] = useState(JSON.parse(localStorage.getItem('CartData')).length)
   
   const location = useLocation()
   const navigate = useNavigate()
@@ -106,7 +105,6 @@ function PersistentDrawerLeft(props) {
     handleCloseUserMenu()
   }
   useEffect(() => {
-    setProductCart(JSON.parse(localStorage.getItem('CartData')).length)
   }, [])
   const renderContent = (routeName) => {
     switch (routeName) {
@@ -165,7 +163,7 @@ function PersistentDrawerLeft(props) {
                 border: '1px solid gray',
                 borderRadius: '5px',
                 margin: '10px' }}>
-                  <Badge badgeContent={productCart} color="secondary">
+                  <Badge color="secondary">
                 <ShoppingCartIcon />
                 </Badge>
               </IconButton>

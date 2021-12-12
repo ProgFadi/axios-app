@@ -8,19 +8,6 @@ import {Navigate} from 'react-router-dom'
 
 function Product() {
   const [isLogged, setIsLogged] = useState(true)
-  
-  
-  axios({
-    method: 'get',
-    url: 'https://fakestoreapi.com/products',
-  })
-  .then((response)=>{
-    let data = response.data;
-    localStorage.setItem('data', JSON.stringify(data))
-  })
-  .catch((err)=>{
-    console.log(err)
-  })
   const [products,setProducts] = useState(JSON.parse(localStorage.getItem('data')))
   const [itemFound,setItemFound] = useState(products)
   
