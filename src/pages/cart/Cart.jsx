@@ -7,7 +7,6 @@ import {Navigate} from 'react-router-dom'
 
 const Cart = () => {
 const [productCart,setProductCart] = useState(JSON.parse(localStorage.getItem('CartData')))
-console.log(JSON.parse(localStorage.getItem('Cartata')))
     const [isLogged, setIsLogged] = useState(true)
     useEffect(()=>{
         let token;

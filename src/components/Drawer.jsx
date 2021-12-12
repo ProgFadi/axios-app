@@ -30,7 +30,7 @@ import Tooltip from '@mui/material/Tooltip';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Cart from '../pages/cart/Cart';
 import Badge from '@mui/material/Badge';
-import  { useEffect, useState } from 'react';
+import  { useEffect } from 'react';
 
 
 const drawerWidth = 240;

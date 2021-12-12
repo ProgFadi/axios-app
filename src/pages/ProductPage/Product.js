@@ -2,7 +2,6 @@ import Header from './Header';
 import './styles.css'
 import { useEffect, useState } from 'react';
 import Products from './Products';
-import axios from 'axios'
 import {Navigate} from 'react-router-dom'
 
 
