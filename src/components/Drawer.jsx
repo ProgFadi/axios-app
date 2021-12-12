@@ -90,6 +90,9 @@ function PersistentDrawerLeft(props) {
   const [open, setOpen] = React.useState(false);
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+var length = 0
+  let cart = JSON.parse(localStorage.getItem('CartData'))
+  if (cart) length = cart.length
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -163,7 +166,7 @@ function PersistentDrawerLeft(props) {
                 border: '1px solid gray',
                 borderRadius: '5px',
                 margin: '10px' }}>
-                  <Badge color="secondary">
+                  <Badge badgeContent={length} color="secondary">
                 <ShoppingCartIcon />
                 </Badge>
               </IconButton>

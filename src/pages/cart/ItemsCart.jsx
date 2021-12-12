@@ -12,6 +12,8 @@ import { Alert } from '@mui/material';
 const ItemsCart = ({onClick,productCart}) => {
     
     const [open, setOpen] = useState(false);
+    var length = 0
+    if(productCart) length = productCart.length
     
     const handleClose = () => {
         setOpen(false);
@@ -26,7 +28,7 @@ const ItemsCart = ({onClick,productCart}) => {
             borderRadius: '10px',
             backgroundColor: '#f8f8f8',}}>
                 
-             {productCart ? productCart.map((product, index)=>(
+             {length>0 ? productCart.map((product, index)=>(
                  
                  <div className={'product'} key={index}>
          <div> 
