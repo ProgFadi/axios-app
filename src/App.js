@@ -12,6 +12,7 @@ function App(props) {
   return (
     <AuthProvider>
       <Routes>
+        <Route path="/" element={<Drawer />} />
         <Route path="/dashboard" element={<Drawer />} />
         <Route path="/categories" element={<Drawer {...props} />} />
         <Route path="/products" element={<Drawer />} />
