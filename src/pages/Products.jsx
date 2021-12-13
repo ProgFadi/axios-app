@@ -93,10 +93,7 @@ function Products() {
             setProducts(products)
 
         });
-    useEffect(() => {
-        setSearch(products)
 
-    },[products])
          const searched=(e)=>{
                let filter = products.filter((item)=>{
                    return item.title.toLowerCase().includes(e.target.value.toLowerCase())
