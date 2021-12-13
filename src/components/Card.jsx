@@ -7,36 +7,30 @@ import Typography from '@mui/material/Typography';
 import {Button, CardActionArea, CardActions} from '@mui/material';
 import {CART_PRODUCTS} from "./axios/Constants";
 
-/* for currency formatting */
-const formatPrice = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-});
-
 export default function MultiActionAreaCard(props) {
     const classes = useStyles();
+    let tempProducts = [];
 
-    /* add to cart */
-    function addItem() {
-        let tempProducts = [];
-        let product = { id: props.obj.id, title: props.obj.title , price: formatPrice.format(props.obj.price),image: props.obj.image}
+    /* add item to the cart */
+    const addItem = () => {
+        console.log(props.obj.price)
+        let product = { id: props.obj.id, title: props.obj.title , price: props.obj.price, image: props.obj.image}
         tempProducts = JSON.parse(localStorage.getItem(CART_PRODUCTS));
         tempProducts.push(product);
         localStorage.setItem(CART_PRODUCTS, JSON.stringify(tempProducts));
     }
 
-    function removeItem(ID) {
-        let tempProducts = [];
+    /* remove item from the cart (you should refresh the page to see the new items array) */
+    const removeItem = () => {
+        console.log(props.obj.price)
         tempProducts = JSON.parse(localStorage.getItem(CART_PRODUCTS));
-        tempProducts.splice(tempProducts.indexOf(ID), 1);
-        console.log(tempProducts)
+        tempProducts.splice(tempProducts.findIndex(x => x.id === props.obj.id), 1);
         localStorage.setItem(CART_PRODUCTS,JSON.stringify(tempProducts));
     }
 
-    const CardFunction = (ID) => {
-        if(props.buttonText === 'remove'){
-             removeItem(ID)
-        }
+    const CardFunction = () => {
+        if(props.buttonText === 'remove')
+            removeItem()
         else
              addItem()
     }
@@ -55,15 +49,12 @@ export default function MultiActionAreaCard(props) {
                         {props.obj.title}
                     </Typography>
                     <Typography component="div" className={`${classes.price} ${classes.Typography}`}>
-                        {formatPrice.format(props.obj.price)}
+                        {'$'+props.obj.price}
                     </Typography>
                 </CardContent>
             </CardActionArea>
             <CardActions>
-                <Button size="small" className={classes.CardButton} onClick={() => {
-                    console.log(props.obj.id)
-                    CardFunction(props.obj.id)
-                }}>
+                <Button size="small" className={classes.CardButton} onClick={ CardFunction }>
                     {props.buttonText}
                 </Button>
             </CardActions>

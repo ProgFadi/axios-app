@@ -24,7 +24,7 @@ export default function ProductsCards() {
     },[])
 
 
-    /* for search and adding products */
+    /* for search and display products */
     const [rows, setRows] = useState([]);
     const [searchRows, setSearchRows] = useState([]);
 
@@ -39,9 +39,6 @@ export default function ProductsCards() {
         });
         setSearchRows(filteredRows);
     };
-
-    console.log(rows)
-
 
     return (
             <Box>

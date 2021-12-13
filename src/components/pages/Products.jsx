@@ -1,32 +1,15 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Box from './Home';
 import ProductsCards from '../ProductsCards'
-import {Navigate} from "react-router-dom";
+import AuthHoc from "../AuthHoc";
 
-
-function Products(props) {
-    const [isLogged, setIsLogged] = React.useState(true)
-    useEffect(()=>{
-        let token;
-        try {
-            token = JSON.parse(localStorage.getItem('token'))
-            if(!token)
-                setIsLogged(false)
-
-        } catch (error) {
-            console.log(error)
-            setIsLogged(false)
-        }
-
-    },[])
-
-    if(!isLogged)
-        return <Navigate to="/login"/>
-
+function Products() {
     return (
         <Box>
             <ProductsCards/>
         </Box>
     );
 }
+
+Products = AuthHoc(Products);
 export default Products;
