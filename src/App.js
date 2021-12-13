@@ -5,7 +5,7 @@ import {useState} from 'react'
 import Drawer from './components/Drawer'
 
 function App(props) {
-  let [cartItems, setCartItems] = useState([]);
+  let [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem('data')));
   const addToLocalStorage = ((addData)=>{
     let obj ={
              id : addData.id,

@@ -1,6 +1,5 @@
 
 function Cart({onRemove, cartItems}) {
-   
     return (
         <div>
               <div className={'pro'}>
@@ -21,7 +20,6 @@ function Cart({onRemove, cartItems}) {
                     ))
                 }
             </div>
-            {/* <Paper/> */}
         </div>
     )
 }

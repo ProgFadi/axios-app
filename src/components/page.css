@@ -38,7 +38,7 @@ body{
 }
 .img-div{
     width:100%;
-    margin-top: 30px;
+    margin-top: 25px;
     text-align:center
 }
 img { 
@@ -48,9 +48,17 @@ img {
 }
 .pro-nam{
     position:absolute;
-    bottom: 30px;
+    bottom: 38px;
     left: 10px;
     font-size: 16px;
+
+}
+.pro-desc{
+    position:absolute;
+    bottom: 13px;
+    left: 10px;
+    font-size: 14px;
+    color: rgb(121, 121, 121);
 
 }
 .price{

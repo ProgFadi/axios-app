@@ -8,13 +8,13 @@ function ProductCard ({passedData, onAdd}){
     if (!passedData.length) return <Progress/>
   return (
       <div>
-      <InputField ph="Enter Product Title" onCh={event => setQuery(event.target.value)} />
+      <InputField ph="Search" onCh={event => setQuery(event.target.value)} />
         <div className={'pro'}>
       {
           passedData.filter(product => {
               if (query === '') {
                   return passedData;
-        } else if (product.title.toLowerCase().includes(query.toLowerCase())) {
+        } else if (product.title.toLowerCase().includes(query.toLowerCase()) || product.category.toLowerCase().includes(query.toLowerCase())) {
             return product;
         }
     }).map((product, index)=>(
@@ -22,6 +22,7 @@ function ProductCard ({passedData, onAdd}){
                             <div className={'img-div'}>
                             <img src={product.image} alt="" />
                             </div>
+                            <h2  className={'pro-desc'}>{product.category}</h2>
                             <h3 className={'pro-nam'}>
                             {product.title}
                             </h3>
