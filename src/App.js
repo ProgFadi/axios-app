@@ -14,6 +14,7 @@ function App(props) {
       <Route path="/dashboard" element={<Drawer />} />
       <Route path="/categories" element={<Drawer {...props} />} />
       <Route path="/products" element={<Drawer />} />
+      <Route path="/cart" element={<Drawer />} />
       <Route path="/login" element={<Login />} />
     </Routes>
   );
