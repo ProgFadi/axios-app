@@ -8,8 +8,6 @@ import { useState } from "react";
 const getId = () => {
   return "id" + new Date().getTime();
 };
-// this is the old product component
-
 function Product(props) {
   const addItem = (object) => {
     let cart = JSON.parse(localStorage.getItem("cart"));
@@ -38,29 +36,40 @@ function Product(props) {
     productsRerenderFun([]);
   };
   return (
-    <div className="product">
-      <img src={props.imgSrc} alt="Shoe" width="200px" height="200px" />
-      <h3>{props.productName}</h3>
-      <h4>${props.productPrice}</h4>
-      {props.cartItem ? (
-        <Chip
-          sx={{
-            width: "100%",
-            backgroundColor: "#d11a2a",
-          }}
-          label="Delete from cart"
-          onDelete={() => {
-            deleteItem(props.object.id, props.productsRerender);
-          }}
-        />
-      ) : (
-        <Button
-          onClickFunction={() => {
-            addItem(props.object);
-          }}
-          text="Add to Cart"
-        />
-      )}
+    <div class="card">
+      <img src={props.imgSrc} alt="" />
+      <div class="card-body">
+        <div class="row">
+          <div class="card-title">
+            <h4>{props.productName}</h4>
+            <h3>{props.productPrice}</h3>
+          </div>
+        </div>
+        <hr />
+        <div class="btn-group">
+          {props.cartItem ? (
+            <Chip
+              className={"btn"}
+              sx={{
+                width: "100%",
+                backgroundColor: "#d11a2a",
+              }}
+              label="Delete from cart"
+              onDelete={() => {
+                deleteItem(props.object.id, props.productsRerender);
+              }}
+            />
+          ) : (
+            <Button
+              className={"btn"}
+              onClickFunction={() => {
+                addItem(props.object);
+              }}
+              text="Add to Cart"
+            />
+          )}
+        </div>
+      </div>
     </div>
   );
 }

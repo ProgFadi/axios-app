@@ -5,6 +5,7 @@ import Input from "../components/Input";
 import Product from "../components/Product";
 import axios from "axios";
 import "./PagesStyles/ProductsPage.css";
+import ProductCard from "../components/ProductCard";
 function Products(props) {
   const [isLogged, setIsLogged] = useState(true);
   const [searchValue, setSearchValue] = useState("");
@@ -54,7 +55,7 @@ function Products(props) {
         {filteredProducts.length === 0 && searchValue === ""
           ? products.map((item) => {
               return (
-                <Product
+                <ProductCard
                   object={item}
                   productName={item.title}
                   productPrice={item.price}
@@ -64,7 +65,7 @@ function Products(props) {
             })
           : filteredProducts.map((item) => {
               return (
-                <Product
+                <ProductCard
                   object={item}
                   productName={item.title}
                   productPrice={item.price}

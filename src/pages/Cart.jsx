@@ -2,6 +2,7 @@ import React from "react";
 import Product from "../components/Product";
 import "./PagesStyles/ProductsPage.css";
 import { useState } from "react";
+import ProductCard from "../components/ProductCard";
 function Cart() {
   const [neglected, productsRerender] = useState(
     JSON.parse(localStorage.getItem("cart"))
@@ -12,12 +13,12 @@ function Cart() {
   }
 
   return (
-    <div className={"products"}>
+    <div className={"container"}>
       {cart.map((item, index) => {
         item = JSON.parse(item);
         item.index = index;
         return (
-          <Product
+          <ProductCard
             productsRerender={productsRerender}
             cartItem={true}
             object={item}
