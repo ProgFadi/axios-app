@@ -1,0 +1,7 @@
+.cards_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(22vw, 1fr));
+    gap: 4vh 4vw;
+    padding: 4vh 4vw;
+}
+

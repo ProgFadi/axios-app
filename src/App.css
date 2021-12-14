@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+}
+
+.side_panel {
+    width: 20vw;
+    height: 100vh;
+    position: fixed;
+    background: black;
+    display: flex;
+    flex-direction: column;
+}
+.side_panel .link {
+    color: white;
+    padding: 3vh 3vw;
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+}
+.side_panel .link:hover {
+    background: white;
+    color: black;
+}
+
+.content {
+    margin-left: 20vw;
+}
