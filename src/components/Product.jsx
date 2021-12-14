@@ -13,7 +13,7 @@ function Product(props) {
           <b>{props.product.title}</b>
           <small style={{ color: "#808080", fontWeight: '400'}}>$ {props.product.price}</small>
         </div>
-      <button className="product-button">Add to Cart</button>
+      <button className="product-button" onClick={props.onAddToCart}>Add to Cart</button>
     </div>
   );
 }

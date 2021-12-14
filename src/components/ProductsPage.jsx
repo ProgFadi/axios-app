@@ -15,6 +15,22 @@ function ProductsPage(props) {
   const [price, setPrice] = useState('');
   const [products, setProducts] = useState([]);
 
+  const addToCart = (selectedProduct) => {
+    let myProducts = JSON.parse(localStorage.getItem("myProducts"));
+    if(myProducts)
+    {
+      myProducts.push(selectedProduct);
+      var myNewProducts = myProducts;
+    }else{
+      var myNewProducts = [selectedProduct];
+
+    }
+    localStorage.setItem('myProducts', JSON.stringify(myNewProducts));
+    alert(`${selectedProduct.title} Added to cart! (see console) `)
+    console.log(localStorage.getItem('myProducts'));
+
+  }
+
   const addProduct = (e) => {
     e.preventDefault();
     const tempProducts = [...products, {
@@ -68,11 +84,11 @@ function ProductsPage(props) {
   },[])
   
   return (
-    <div class="products-container">
+    <div className="products-container">
       {/* Search */}
       {/* product input */}
       {/* products list */}
-      <div class="products-header">
+      <div className="products-header">
         <form onSubmit={addProduct}>
           <Input
             type="text"
@@ -92,7 +108,7 @@ function ProductsPage(props) {
             placeholder="price"
             onChange={handleInput}
           />
-          <Button class="submit-button" type="submit" label="Add New" />
+          <Button className="submit-button" type="submit" label="Add New" />
         </form>
         <Input
           name="search"
@@ -104,11 +120,11 @@ function ProductsPage(props) {
       </div>
       <div className="products">
         {queryResult && queryResult.length > 0
-          ? queryResult.map((product, key) => (
-              <Product product={product} key={key}></Product>
+          ? queryResult.map((product) => (
+              <Product product={product} onAddToCart={()=> addToCart(product)} key={product.id}></Product>
             ))
-          : products.map((product, key) => (
-              <Product product={product} key={key}></Product>
+          : products.map((product) => (
+              <Product product={product} onAddToCart={()=> addToCart(product)} key={product.id}></Product>
             ))}
       </div>
     </div>
