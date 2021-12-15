@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import axios from '../utils/axios'
 import axios from 'axios'
 import {TOKEN_KEY} from '../utils/Constants'
+
 
 
 function Login(props) {
@@ -32,12 +33,23 @@ function Login(props) {
             console.log(err)
         })
     }
+=======
+import AuthContext from '../contexts/AuthContext'
+function Login(props) {
+    const [email, setEmail] = React.useState('')
+    const [password, setPassword] = React.useState('')
+    const {login} = useContext(AuthContext)
+    console.log('login jsx ',login)
+  
     return (
         <div>
           <form>
               <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" />
               <input value={password} onChange={(e)=>setPassword(e.target.value)} type="password" />
-              <input type="submit" onClick={login}/>
+              <input type="submit" onClick={(e)=> {
+                  e.preventDefault()
+                  login(email,password)
+              }}/>
           </form>
         </div>
     );

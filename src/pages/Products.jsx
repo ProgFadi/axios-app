@@ -1,6 +1,12 @@
+
 import React, { useEffect, useState } from 'react';
 import Cards from '../components/Cards';
 import {Navigate} from 'react-router-dom'
+=======
+import React, { useEffect } from 'react';
+import {Navigate} from 'react-router-dom'
+import useAuth from '../hooks/useAuth';
+
 
 function Products(props) {
 
