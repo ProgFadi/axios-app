@@ -5,8 +5,10 @@ import Button from "./Button";
 import {GET_PRODUCTS_HOST, GET_PRODUCTS_PATH} from "./../utils/Constants"
 import axios from '../utils/axios'
 import { useNavigate } from 'react-router-dom'
+import  useUserItemsCount from '../hooks/useUserItemsCount'
 
 function ProductsPage(props) {
+  const {myProducts, addProductToCart} = useUserItemsCount()
   const navigate = useNavigate()
   const [queryResult, setQueryResult] = useState([]);
   const [queryParam, setQueryParam] = useState('');
@@ -15,21 +17,21 @@ function ProductsPage(props) {
   const [price, setPrice] = useState('');
   const [products, setProducts] = useState([]);
 
-  const addToCart = (selectedProduct) => {
-    let myProducts = JSON.parse(localStorage.getItem("myProducts"));
-    if(myProducts)
-    {
-      myProducts.push(selectedProduct);
-      var myNewProducts = myProducts;
-    }else{
-      var myNewProducts = [selectedProduct];
+  // const addToCart = (selectedProduct) => {
+  //   let myProducts = JSON.parse(localStorage.getItem("myProducts"));
+  //   if(myProducts)
+  //   {
+  //     myProducts.push(selectedProduct);
+  //     var myNewProducts = myProducts;
+  //   }else{
+  //     var myNewProducts = [selectedProduct];
 
-    }
-    localStorage.setItem('myProducts', JSON.stringify(myNewProducts));
-    alert(`${selectedProduct.title} Added to cart! (see console) `)
-    console.log(localStorage.getItem('myProducts'));
+  //   }
+  //   localStorage.setItem('myProducts', JSON.stringify(myNewProducts));
+  //   alert(`${selectedProduct.title} Added to cart! (see console) `)
+  //   console.log(localStorage.getItem('myProducts'));
 
-  }
+  // }
 
   const addProduct = (e) => {
     e.preventDefault();
@@ -39,9 +41,8 @@ function ProductsPage(props) {
       price: price,
     }];
     setProducts(tempProducts);
-    console.log(tempProducts);
 
-    console.log("added !")
+    alert("added !")
   }
 
   const handleInput = (e) => {
@@ -70,10 +71,10 @@ function ProductsPage(props) {
     .then((response)=>{
         // console.log(response)
         let data = response.data;
-        // let customData = {'name': data.title, 'type' : data.category, 'price': data.price}
+        let customData = {'name': data.title, 'type' : data.category, 'price': data.price}
         setProducts(response.data)
         // localStorage.setItem(TOKEN_KEY, JSON.stringify(data))
-        // navigate('/products')
+        navigate('/products')
     })
     .catch((err)=>{
         console.log(err)
@@ -121,10 +122,10 @@ function ProductsPage(props) {
       <div className="products">
         {queryResult && queryResult.length > 0
           ? queryResult.map((product) => (
-              <Product product={product} onAddToCart={()=> addToCart(product)} key={product.id}></Product>
+              <Product product={product} onAddToCart={()=> addProductToCart(product)} key={product.id}></Product>
             ))
           : products.map((product) => (
-              <Product product={product} onAddToCart={()=> addToCart(product)} key={product.id}></Product>
+              <Product product={product} onAddToCart={()=> addProductToCart(product)} key={product.id}></Product>
             ))}
       </div>
     </div>

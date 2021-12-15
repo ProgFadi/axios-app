@@ -32,7 +32,6 @@ export const AuthProvider = ({children})=>{
 
         const logout = ()=>{
             localStorage.removeItem(TOKEN_KEY);
-            console.log('logout event')
             dispatch({
                 type:'LOGOUT'
             })
@@ -45,7 +44,6 @@ export const AuthProvider = ({children})=>{
         }
         )
         .then((response)=>{
-            console.log(response)
             let token = response.data.token.access_token;
             let data = response.data;
             localStorage.setItem(TOKEN_KEY, JSON.stringify(data))
@@ -61,7 +59,6 @@ export const AuthProvider = ({children})=>{
     }
         useEffect(()=>{
             let data = JSON.parse(localStorage.getItem(TOKEN_KEY))
-            console.log('use effect , data is : ',data)
             if(data)
             {
                 dispatch({

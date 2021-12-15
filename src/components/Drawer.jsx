@@ -36,7 +36,10 @@ import Tooltip from '@mui/material/Tooltip';
 import AuthContext from '../contexts/AuthContext' 
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import ItemsNumber from './ItemsNumber'
+import Badge from '@mui/material/Badge'
 import useLogout from '../hooks/useLogout'
+import  useUserItemsCount from '../hooks/useUserItemsCount'
+
 const drawerWidth = 240;
 
 
@@ -87,13 +90,13 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 function PersistentDrawerLeft(props) { 
+  const {myProducts, addProductToCart} = useUserItemsCount()
   const location = useLocation()
   const navigate = useNavigate()
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const ctx = React.useContext(AuthContext);
   const {logout} = useLogout()
-  console.log('ctx in drawer :',ctx)
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   if(!ctx.isAuth)
   {
@@ -111,7 +114,6 @@ function PersistentDrawerLeft(props) {
 
   }, [])
   const renderContent = (routeName) => {
-    console.log(routeName)
     switch (routeName) {
       case '/login':
         return <Login />
@@ -161,7 +163,9 @@ function PersistentDrawerLeft(props) {
             <Tooltip title="My Items">
               <ShoppingBasketIcon sx={{ p: 0, position: 'fixed', right: "6%", top: "2.5%",fontSize: 30}}/>
             </Tooltip>
-            <ItemsNumber number="1"/>
+            <Badge badgeContent={4} color="primary">
+              <ItemsNumber number={myProducts.length}/>
+            </Badge>
             
             <Menu
               sx={{ mt: '45px' }}

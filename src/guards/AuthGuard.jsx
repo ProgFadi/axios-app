@@ -5,7 +5,6 @@ import useAuth from '../hooks/useAuth'
 
 function AuthGuard(props) {
     const {isAuth} = useAuth()
-    console.log('Auth Guard: ',isAuth)
     if(!isAuth)
         return <Navigate to="/login"/>
 

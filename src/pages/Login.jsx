@@ -7,7 +7,6 @@ function Login(props) {
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
     const {login} = useContext(AuthContext)
-    console.log('login jsx ',login)
     return (
         <div>
           <form>
