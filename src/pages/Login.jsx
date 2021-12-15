@@ -1,20 +1,26 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from '../utils/axios'
+// import axios from '../utils/axios'
+import axios from 'axios'
 import {TOKEN_KEY} from '../utils/Constants'
+
+
 function Login(props) {
+    
+
     const navigate = useNavigate()
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
 
     const login = (e)=>{
         e.preventDefault()
-        axios.post('/api/academy/auth/login',
+        axios.post('https://website-backend.computiq.tech/api/academy/auth/login',
         {
             email:email,
             password:password
         }
         )
+        
         .then((response)=>{
             console.log(response)
             let token = response.data.token.access_token;

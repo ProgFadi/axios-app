@@ -228,6 +228,12 @@ function PersistentDrawerLeft(props) {
             <ListItemText primary='Logout' />
           </ListItem>
         </List>
+
+        <List>
+          <ListItem component={Link} to="/cart">
+              <ListItemText primary='Cart' />
+          </ListItem>
+        </List>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
