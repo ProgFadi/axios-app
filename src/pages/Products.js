@@ -1,21 +1,37 @@
 import React, {  useState ,useEffect} from 'react';
 import './product.css'
+import {Navigate} from 'react-router-dom'
 import axios from 'axios'
 
 export default function Products({addToCart}) {
     const[searchProduct,setSearchProduct]=useState("");
     const [carts,setCarts]=useState([]);
+    const [isLogged, setIsLogged] =useState(true)
     useEffect(()=>{
       axios.get('https://fakestoreapi.com/products')
       .then(res=>{
-        let data=(res.data)
-        setCarts(data)
-        
+        let data=(res.data);
+        setCarts(data);
       })
-      .catch(ere=>{
-        console.log(ere)
-      })
-    },[carts])
+        let token;
+        try {
+        token = JSON.parse(localStorage.getItem('token'))
+        console.log('2')
+        if(!token)
+         setIsLogged(false)
+
+        } catch (error) {
+            console.log(error)
+            setIsLogged(false)
+        }
+    
+    },[])
+    console.log('3')
+
+    if(!isLogged){
+      return <Navigate to="/login"/>
+    }
+   
 
     const searchInput=(event)=>{
       event.preventDefault();
