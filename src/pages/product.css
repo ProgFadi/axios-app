@@ -1,0 +1,123 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  
+  }
+  body{
+      font-family: Arial;
+  }
+  :root{
+      --mainColor:#d32f2f;
+      --secondaryColor:#fff;
+      --placeholderColor:#777;
+      --backgroundColor:#eee ;
+      --spanColor:#707070;
+      --bouttonColor:#d32f2f;
+      
+  
+  }
+  .container{
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+  /*---form-div-----*/
+ 
+ .search-input{
+  width: 249px;
+  height: 39px;
+  border-radius: 5px;
+  border: 1px solid #d32f2f;
+  font-size: 14px;
+    
+   
+  }
+  
+.search-input::placeholder{
+      padding: 5px ;
+      color:var(--placeholderColor);
+  }
+ 
+  /*---flex div-----*/
+  .flex{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+  }
+  
+  /*---card div-----*/
+  .card{
+    width: 350px;
+    background-color: #fdfdfd;
+    height: 350px;
+    border-radius: 5px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0px 0px 5px 1px #a4a3a359;
+  
+  }
+  .card:hover{
+    transform: translateY(-5px);
+    transition: all 0.5s ease-in-out;
+  }
+  
+  
+   
+  
+  .card span {
+    align-self: self-start;
+    padding-left: 10px;
+    font-size: 15px;
+    color:var(--spanColor);
+    
+  }
+  .card img{
+    align-self: center;
+    width: 150px;
+    height: 150px;
+  }
+  .card .text {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 15px;
+  }
+  .card .text p{
+    font-size: 16px;
+    font-weight: bold;
+    margin: 3px;
+    white-space: nowrap;
+    text-overflow: clip;
+    overflow: hidden;
+    width: 100%;
+  }
+  .card .text span{
+    padding-top: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #d32f2f;
+  }
+  .card button{
+    padding: 16px;
+    background-color:var(--mainColor);
+    color: var(--secondaryColor);
+    border: none;
+    width: 96%;
+    align-self: center;
+    border-radius: 5px 5px;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 375px) {
+    .form {flex-direction: column; align-items: center;}
+    .form .search-input {width: 180px;margin-left: -20px;}
+    .form form {flex-direction: column;margin: 5px;}
+    .form form input {margin-bottom: 5px;}
+    .flex {justify-content: center;}
+  }

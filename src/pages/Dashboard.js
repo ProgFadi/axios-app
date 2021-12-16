@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React ,{useEffect,useState} from 'react'
 import {Navigate} from 'react-router-dom'
-function Dashboard(props) {
-    const [isLogged, setIsLogged] = React.useState(true)
+export default function Dashboard() {
+    const [isLogged, setIsLogged] =useState(true)
     useEffect(()=>{
         console.log('1')
         let token;
@@ -20,13 +20,10 @@ function Dashboard(props) {
     console.log('3')
 
     if(!isLogged)
-        return <Navigate to="/login"/>
-
+      return <Navigate to="/login"/>
     return (
         <div>
-            Dashboard
+            <h1>Dashboard Page</h1>
         </div>
-    );
+    )
 }
-
-export default Dashboard;
