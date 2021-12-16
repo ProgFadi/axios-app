@@ -1,6 +1,7 @@
 import { createContext, useEffect, useReducer } from "react";
+import { Navigate } from "react-router";
 import axios from '../utils/axios'
-import {TOKEN_KEY} from '../utils/Constants'
+import {TOKEN_KEY, LOGIN_HOST, LOGIN_PATH} from '../utils/Constants'
 let initState = {
     isAuth:false,
     user:null,
@@ -31,26 +32,25 @@ export const AuthProvider = ({children})=>{
 
         const logout = ()=>{
             localStorage.removeItem(TOKEN_KEY);
-            console.log('logout event')
             dispatch({
                 type:'LOGOUT'
             })
         }
          const login = (email, password)=>{
-        axios.post('/api/academy/auth/login',
+        axios.post(`${LOGIN_HOST}${LOGIN_PATH}`,
         {
             email:email,
             password:password
         }
         )
         .then((response)=>{
-            console.log(response)
             let token = response.data.token.access_token;
             let data = response.data;
             localStorage.setItem(TOKEN_KEY, JSON.stringify(data))
             dispatch({
                 type:'LOGIN'
             })
+            Navigate('/dashboard');
         })
         .catch((err)=>{
             console.log(err)
@@ -59,7 +59,6 @@ export const AuthProvider = ({children})=>{
     }
         useEffect(()=>{
             let data = JSON.parse(localStorage.getItem(TOKEN_KEY))
-            console.log('use effect , data is : ',data)
             if(data)
             {
                 dispatch({
