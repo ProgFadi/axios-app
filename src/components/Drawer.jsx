@@ -129,7 +129,7 @@ function PersistentDrawerLeft(props) {
     setAnchorElUser(null);
   };
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', backgroundColor:'#f5f3f0' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar >

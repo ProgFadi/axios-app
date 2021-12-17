@@ -22,6 +22,7 @@ const reducer = (oldState,action)=>{
                 ...oldState,
                 isAuth:false
             }
+        
     }
 }
 
