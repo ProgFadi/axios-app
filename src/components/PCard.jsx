@@ -15,6 +15,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { Tooltip } from '@mui/material';
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -68,9 +69,11 @@ const obj = props.obj
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
+        <Tooltip title={'Add to cart'}>
         <IconButton aria-label="add to cart">
           <AddShoppingCartIcon />
         </IconButton>
+        </Tooltip>
        
         <ExpandMore
           expand={expanded}
