@@ -5,15 +5,43 @@ import axios from '../utils/axios'
 import PCard from '../components/PCard'
 import { Box } from '@mui/material';
 function Products(props) {
-   const [products, setProducts] = useState([])
+   const [products, setProducts] = useState([
+       {
+           title:'',
+           image:'',
+           description:'',
+           category:''
+       },
+       {
+        title:'',
+        image:'',
+        description:'',
+        category:''
+    },
+    {
+        title:'',
+        image:'',
+        description:'',
+        category:''
+    },
+    {
+        title:'',
+        image:'',
+        description:'',
+        category:''
+    }
+   ])
+   const [isLoading, setIsLoading] = useState(true)
     useEffect(()=>{
         axios.get('https://fakestoreapi.com/products')
         .then((res)=>{
             console.log(res)
             setProducts(res.data)
+            setIsLoading(false)
         })
         .catch((err)=>{
             console.log(err)
+            setIsLoading(false)
         })
     },[])
     return (
@@ -28,7 +56,7 @@ function Products(props) {
         >
            {
                products && products.map((item)=>{
-                   return <PCard obj={item}/>
+                   return <PCard obj={item} isLoading={isLoading}/>
                })
            }
         </Box>
