@@ -17,6 +17,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { Box, Tooltip } from "@mui/material";
 import Skeleton from "@mui/material/Skeleton";
+import CartContext from "../contexts/CartContext";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -32,7 +33,8 @@ const ExpandMore = styled((props) => {
 export default function RecipeReviewCard(props) {
   const obj = props.obj;
   const [expanded, setExpanded] = React.useState(false);
-
+  const {addToCarts} = React.useContext(CartContext)
+  console.log(addToCarts)
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -110,7 +112,10 @@ export default function RecipeReviewCard(props) {
       </CardContent>
       <CardActions disableSpacing>
         <Tooltip title={"Add to cart"}>
-          <IconButton aria-label="add to cart">
+          <IconButton onClick={()=>{
+              console.log('1')
+              addToCarts(obj)
+          }} aria-label="add to cart">
             <AddShoppingCartIcon />
           </IconButton>
         </Tooltip>
@@ -118,7 +123,7 @@ export default function RecipeReviewCard(props) {
         <ExpandMore
           expand={expanded}
           onClick={() => {
-            console.log("not yet!");
+            
           }}
           aria-expanded={expanded}
           aria-label="show more"

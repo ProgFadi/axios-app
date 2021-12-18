@@ -8,15 +8,18 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Drawer from "./components/Drawer";
 import { AuthProvider } from "./contexts/AuthContext";
+import { CartProvider } from "./contexts/CartContext";
 function App(props) {
   return (
     <AuthProvider>
-      <Routes>
+     <CartProvider>
+     <Routes>
         <Route path="/dashboard" element={<Drawer />} />
         <Route path="/categories" element={<Drawer {...props} />} />
         <Route path="/products" element={<Drawer />} />
         <Route path="/login" element={<Login />} />
       </Routes>
+     </CartProvider>
     </AuthProvider>
   );
 }

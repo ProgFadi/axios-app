@@ -4,8 +4,12 @@ import useAuth from '../hooks/useAuth';
 import axios from '../utils/axios'
 import PCard from '../components/PCard'
 import { Box } from '@mui/material';
+import CartContext from '../contexts/CartContext';
+
+
 function Products(props) {
-   const [products, setProducts] = useState([
+   
+    const [products, setProducts] = useState([
        {
            title:'',
            image:'',
@@ -31,6 +35,7 @@ function Products(props) {
         category:''
     }
    ])
+
    const [isLoading, setIsLoading] = useState(true)
     useEffect(()=>{
         axios.get('https://fakestoreapi.com/products')
@@ -57,6 +62,7 @@ function Products(props) {
            {
                products && products.map((item)=>{
                    return <PCard obj={item} isLoading={isLoading}/>
+                      
                })
            }
         </Box>
