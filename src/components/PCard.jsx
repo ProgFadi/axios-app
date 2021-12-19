@@ -18,6 +18,8 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { Box, Tooltip } from "@mui/material";
 import Skeleton from "@mui/material/Skeleton";
 import CartContext from "../contexts/CartContext";
+import Grow from '@mui/material/Grow';
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -48,30 +50,27 @@ export default function RecipeReviewCard(props) {
         margin: "5px",
       }}
     >
-      {props.isLoading ? (
-        <Box
-        sx={{
-            display:'flex',
-            flexDirection:'row',
-            justifyContent:'flex-start',
-            alignItems:'center'
-        }}
-        >
-             <Skeleton
-            animation="wave"
-            variant="circular"
-            width={40}
-            height={40}
-          />
-          <Skeleton
-            animation="wave"
-            height={10}
-            width="80%"
-            style={{ marginBottom: 6 }}
-          />
-        </Box>
-      ) : (
-        <CardHeader
+      
+        {
+          props.isLoading?
+         <Box
+         sx={{
+           display:'flex',
+           flexDirection:'row',
+           flexGrow:'1',
+          
+         }}
+         >
+            <Skeleton variant="circular" width={40} height={40}/>
+            <Skeleton variant="rectangular" width={"80%"} height={40} />
+
+         </Box>
+          :
+          <Grow
+          in={!props.isLoading}
+          timeout={1000}
+          >
+            <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
               R
@@ -85,25 +84,29 @@ export default function RecipeReviewCard(props) {
           title={obj.title}
           subheader={obj.category}
         />
-      )}
-      {
-          props.isLoading?
-          <Skeleton sx={{ height: 194 }} animation="wave" variant="rectangular" />
-          :
-          <CardMedia
-          component="img"
-          height="194"
-          image={obj.image}
-          alt="Image here"
-        />
-      }
-        {
-            props.isLoading?
-            <React.Fragment>
-            <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-            <Skeleton animation="wave" height={10} width="80%" />
-          </React.Fragment>
-          :
+          </Grow>
+        }
+        
+      
+        
+    
+      
+         
+         {
+           props.isLoading?
+           <Skeleton style={{
+             marginTop:'5px'
+           }} variant="rectangular" height={194} />
+           :
+           <CardMedia
+           component="img"
+           height="194"
+           image={require('../assets/images/1.jpg').default}
+           alt="Image here"
+         />
+         }
+      
+       
             <React.Fragment>
                 <CardContent>
         <Typography variant="body2" color="text.secondary">
@@ -132,7 +135,7 @@ export default function RecipeReviewCard(props) {
         </ExpandMore>
       </CardActions>
             </React.Fragment>
-        }
+        
       
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent></CardContent>

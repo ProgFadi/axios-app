@@ -31,8 +31,9 @@ export const CartProvider = ({children})=>{
         let cartsTemp = carts.filter((item)=>{
            return item.id != id
         })
-        setCarts(cartsTemp)
         localStorage.setItem(CARTS_KEY,JSON.stringify(cartsTemp))
+
+        setCarts(cartsTemp)
 
     }
     return <CartContext.Provider

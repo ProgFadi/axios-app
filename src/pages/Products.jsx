@@ -60,8 +60,9 @@ function Products(props) {
         }}
         >
            {
-               products && products.map((item)=>{
-                   return <PCard obj={item} isLoading={isLoading}/>
+               
+               products && products.map((item,index)=>{
+                   return <PCard isLoading={isLoading} key={index} obj={item}/>
                       
                })
            }

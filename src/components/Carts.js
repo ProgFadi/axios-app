@@ -29,7 +29,7 @@ import {
 import CartContext from '../contexts/CartContext'
 import Grow from '@mui/material/Grow';
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 const iconsMap = {
   order_placed: PackageIcon,
   new_message: MessageIcon,
@@ -50,7 +50,7 @@ const Carts = () => {
   const classes = useStyles();
   const ref = useRef(null);
   const [isOpen, setOpen] = useState(false);
-  const {carts} = useContext(CartContext)
+  const {carts, removeCart} = useContext(CartContext)
   console.log('carts is : ',carts)
   const handleOpen = () => {
     setOpen(true);
@@ -109,6 +109,7 @@ const Carts = () => {
           </Box>
         ) : (
           <>
+          
             <List
             sx={{
               maxHeight:'80%',
@@ -129,7 +130,11 @@ const Carts = () => {
                       flexDirection:'column'
                     }}
                   >
-                   
+                    <IconButton
+                    onClick={()=>removeCart(cart.id)}
+                    >
+                      <RemoveCircleIcon/>
+                    </IconButton>
                     <ListItemText
                       primary={cart.title}
                       primaryTypographyProps={{ variant: 'subtitle2', color: 'textPrimary' }}
