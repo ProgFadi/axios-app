@@ -31,7 +31,7 @@ function Login(props) {
           justifyContent: "center",
           alignItems: "center",
           borderRadius:'5px',
-          backgroundColor:'#ffda8f',
+          backgroundColor:'green',
           padding:'35px'
         }}
       >
