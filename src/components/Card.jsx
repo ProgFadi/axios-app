@@ -22,7 +22,6 @@ export default function MultiActionAreaCard(props) {
 
     /* remove item from the cart (you should refresh the page to see the new items array) */
     const removeItem = () => {
-        console.log(props.obj.price)
         tempProducts = JSON.parse(localStorage.getItem(CART_PRODUCTS));
         tempProducts.splice(tempProducts.findIndex(x => x.id === props.obj.id), 1);
         localStorage.setItem(CART_PRODUCTS,JSON.stringify(tempProducts));
