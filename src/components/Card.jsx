@@ -16,6 +16,7 @@ export default function MultiActionAreaCard(props) {
         console.log(props.obj.price)
         let product = { id: props.obj.id, title: props.obj.title , price: props.obj.price, image: props.obj.image}
         tempProducts = JSON.parse(localStorage.getItem(CART_PRODUCTS));
+        console.log(tempProducts)
         tempProducts.push(product);
         localStorage.setItem(CART_PRODUCTS, JSON.stringify(tempProducts));
     }
