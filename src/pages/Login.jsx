@@ -1,38 +1,42 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from '../utils/axios'
+import axios from '../utils/axios.js';
 import {TOKEN_KEY} from '../utils/Constants'
+import {CART_PRODUCTS} from '../utils/Constants'
+
+
 function Login(props) {
-    const navigate = useNavigate()
-    const [email, setEmail] = React.useState('')
+    const navigate = useNavigate();
+    const [username, setUserName] = React.useState('')
     const [password, setPassword] = React.useState('')
 
-    const login = (e)=>{
-        e.preventDefault()
-        axios.post('/api/academy/auth/login',
+    const login = (e) => {
+        e.preventDefault();
+        //short hand way to write request by axios
+        axios.post('/auth/login',
         {
-            email:email,
-            password:password
-        }
-        )
-        .then((response)=>{
+            username: username,
+            password: password
+        })
+        .then((response)=> {
             console.log(response)
-            let token = response.data.token.access_token;
-            let data = response.data;
-            localStorage.setItem(TOKEN_KEY, JSON.stringify(data))
+            let token = response.data.token;
+            //i convert the data from object to string before i set it in localStorage
+            localStorage.setItem(TOKEN_KEY, JSON.stringify(token))
+            localStorage.setItem(CART_PRODUCTS, JSON.stringify([]));
             navigate('/dashboard')
         })
-        .catch((err)=>{
-            console.log(err)
+        .catch((error)=> {
+            console.log(error)
         })
     }
     return (
         <div>
-          <form>
-              <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" />
-              <input value={password} onChange={(e)=>setPassword(e.target.value)} type="password" />
-              <input type="submit" onClick={login}/>
-          </form>
+            <form>
+                <input type="text" value={username} onChange={(e)=>{setUserName(e.target.value)}} />
+                <input type="password" value={password} onChange={(e)=>{setPassword(e.target.value)}} />
+                <input type="submit" onClick={login} />
+            </form>
         </div>
     );
 }

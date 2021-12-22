@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useEffect } from 'react'
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -16,9 +15,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import { Routes, Link, Route, useLocation, useNavigate } from 'react-router-dom'
+import {Link, useLocation, useNavigate } from 'react-router-dom'
 import Dashboard from '../pages/Dashboard'
 import Categories from '../pages/Categories'
 import Products from '../pages/Products'
@@ -26,17 +23,15 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import GridViewIcon from '@mui/icons-material/GridView';
 import CategoryIcon from '@mui/icons-material/Category';
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
-import Login from '../pages/Login'
 import Avatar from './Avatar'
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Tooltip from '@mui/material/Tooltip';
-import {navigate} from 'react-router-dom'
-import {TOKEN_KEY} from '../utils/Constants'
+import {TOKEN_KEY} from '../utils/Constants';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import Cart from '../pages/Cart/Cart';
 
 const drawerWidth = 240;
-
-
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -99,33 +94,41 @@ function PersistentDrawerLeft(props) {
     setOpen(false);
   };
 
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
   const logout = () => {
     localStorage.removeItem(TOKEN_KEY)
     navigate('/login')
     handleCloseUserMenu()
   }
-  useEffect(() => {
 
-  }, [])
+  const cartFun = () => {
+    navigate('/cart')
+  }
+
+  //Function to render the content page
+
   const renderContent = (routeName) => {
-    console.log(routeName)
-    switch (routeName) {
-      case '/login':
-        return <Login />
+    switch(routeName) {
       case '/products':
-        return <Products />
-      case '/dashboard':
-        return <Dashboard />
+        return <Products/>
       case '/categories':
-        return <Categories />
+        return <Categories/>
+      case '/dashboard':
+        return <Dashboard/> 
+      case '/cart':
+        return <Cart/> 
+      
+      // no default
     }
   }
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -134,7 +137,6 @@ function PersistentDrawerLeft(props) {
           <Box sx={{
             flexGrow: 1,
             display: 'flex',
-            flexDirection: 'row',
             justifyContent: 'space-between'
           }}>
 
@@ -147,14 +149,21 @@ function PersistentDrawerLeft(props) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap component="div">
 
+            <Typography variant="h6" noWrap component="div">
             </Typography>
-            <Tooltip title="Logout">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
+            <Box>
+              <Tooltip title="Cart">
+                <IconButton onClick={cartFun} >
+                  <AddShoppingCartIcon sx={{ color: '#fff', fontSize: 35, marginRight: '15px'}}/>
+                </IconButton>
+              </Tooltip>
+              <Tooltip title="Logout">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar />
+                </IconButton>
+              </Tooltip>
+            </Box>
 
             <Menu
               sx={{ mt: '45px' }}
@@ -172,12 +181,11 @@ function PersistentDrawerLeft(props) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem key='Logout' onClick={logout}>
-                <Typography textAlign="center">Logout</Typography>
+              <MenuItem key='logout' onClick={logout}>
+                <Typography textAlign="center">Log Out</Typography>
               </MenuItem>
             </Menu>
           </Box>
-
         </Toolbar>
       </AppBar>
       <Drawer
